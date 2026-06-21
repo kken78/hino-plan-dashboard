@@ -2,9 +2,14 @@
 (function(){
   const PC = {}; KPI.pillars.forEach(p=>PC[p.id]=p);
   const fmt = n => n==null ? '—' : n.toLocaleString('ja-JP');
-  const yen = t => { // 千円→読みやすく
-    if(t>=1000000) return (t/1000000).toFixed(2)+'<small>十億円</small>';
-    if(t>=10000)   return (t/10000).toFixed(t>=100000?0:1)+'<small>千万円</small>';
+  const yen = t => { // 千円単位の値を 億円／万円 で読みやすく
+    if(t==null) return '—';
+    if(t>=100000){ // 1億円以上（=100,000千円）
+      const oku=t/100000;
+      const s=(oku>=100?oku.toFixed(0):oku.toFixed(1)).replace(/\.0$/,'');
+      return s+'<small>億円</small>';
+    }
+    if(t>=10) return Math.round(t/10).toLocaleString('ja-JP')+'<small>万円</small>'; // 1万円以上（=10千円）
     return fmt(t)+'<small>千円</small>';
   };
   const pillarTotals = ()=>{const m={};KPI.pillars.forEach(p=>m[p.id]=0);

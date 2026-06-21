@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6次日野町総合計画 進捗ダッシュボード（プロトタイプ）</title>
+<meta property="og:title" content="第6次日野町総合計画 進捗ダッシュボード">
+<meta property="og:description" content="KPI・実施計画・住民意識調査を34分野で横断する進捗ダッシュボード（プロトタイプ）">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kken78.github.io/hino-plan-dashboard/">
+<meta property="og:image" content="https://kken78.github.io/hino-plan-dashboard/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kken78.github.io/hino-plan-dashboard/ogp.png">
+<style>
+:root{
+  --p1:#E4567B; --p2:#E8923A; --p3:#5BA84F; --p4:#3B9BC4; --p5:#8B6BB0;
+  --ink:#23303a; --sub:#5c6b75; --line:#e3e8ec; --bg:#f6f8f9; --card:#ffffff;
+  --good:#2f9e57; --warn:#d9534f; --neutral:#9aa5ac;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
+  color:var(--ink); background:var(--bg); line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+/* header */
+header.site{
+  background:linear-gradient(100deg,#3b6e8c 0%,#4a8aa8 100%);
+  color:#fff; padding:26px 0 22px;
+}
+header.site .wrap{display:flex; flex-direction:column; gap:4px}
+.eyebrow{font-size:12px; letter-spacing:.18em; opacity:.85; font-weight:600}
+header.site h1{font-size:clamp(20px,3.4vw,30px); font-weight:800; letter-spacing:.01em}
+header.site .vision{font-size:13px; opacity:.92; margin-top:2px}
+.proto-tag{
+  display:inline-block; margin-top:8px; font-size:11px; background:rgba(255,255,255,.18);
+  padding:3px 10px; border-radius:20px; width:fit-content;
+}
+
+/* tabs */
+nav.tabs{position:sticky; top:0; z-index:30; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 1px 6px rgba(0,0,0,.03)}
+nav.tabs .wrap{display:flex; gap:2px; overflow-x:auto}
+.tab{
+  appearance:none; border:0; background:none; cursor:pointer; white-space:nowrap;
+  font-size:14px; font-weight:700; color:var(--sub); padding:15px 18px;
+  border-bottom:3px solid transparent; font-family:inherit;
+}
+.tab[aria-selected="true"]{color:var(--ink); border-bottom-color:#3b6e8c}
+.tab:focus-visible{outline:2px solid #3b6e8c; outline-offset:-2px}
+
+main{padding:26px 0 60px}
+.panel{display:none}
+.panel[data-active="true"]{display:block; animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h2.sec{font-size:18px; font-weight:800; margin:6px 0 14px; display:flex; align-items:center; gap:9px}
+h2.sec::before{content:""; width:5px; height:20px; background:#3b6e8c; border-radius:3px}
+.lead{color:var(--sub); font-size:13.5px; margin-bottom:18px; max-width:760px}
+
+/* stat cards */
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:13px; margin-bottom:26px}
+.stat{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 16px 15px}
+.stat .k{font-size:11.5px; color:var(--sub); font-weight:700; letter-spacing:.02em}
+.stat .v{font-size:27px; font-weight:800; margin-top:5px; line-height:1.1}
+.stat .v small{font-size:13px; font-weight:700; color:var(--sub); margin-left:2px}
+.stat .note{font-size:11px; color:var(--sub); margin-top:4px}
+
+/* pillar legend */
+.pillars{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+.pill{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; background:#fff; border:1px solid var(--line); padding:6px 12px 6px 10px; border-radius:30px}
+.dot{width:11px; height:11px; border-radius:50%}
+
+/* field cards grid */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:15px}
+.fcard{background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column}
+.fcard .top{padding:13px 15px 11px; border-left:5px solid var(--line)}
+.fcard .fid{font-size:11px; font-weight:800; color:var(--sub)}
+.fcard .fname{font-size:15.5px; font-weight:800; margin-top:1px}
+.fcard .fpolicy{font-size:11px; color:var(--sub); margin-top:2px}
+.fcard .body{padding:4px 15px 14px; flex:1}
+
+/* indicator row */
+.ind{padding:11px 0; border-top:1px solid var(--line)}
+.ind:first-child{border-top:0}
+.ind .iname{font-size:12.5px; font-weight:600; line-height:1.45; margin-bottom:7px}
+.dirtag{font-size:10px; font-weight:800; padding:1px 6px; border-radius:4px; margin-left:6px; vertical-align:middle}
+.dir-up{background:#e7f4ec; color:var(--good)}
+.dir-down{background:#fdeceb; color:var(--warn)}
+.dir-neutral{background:#eef1f3; color:var(--neutral)}
+.bar{position:relative; height:9px; background:#eef1f3; border-radius:6px; overflow:hidden; margin:6px 0 5px}
+.bar > span{position:absolute; left:0; top:0; bottom:0; border-radius:6px; transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.barmeta{display:flex; justify-content:space-between; font-size:11px; color:var(--sub); font-variant-numeric:tabular-nums}
+.barmeta b{color:var(--ink)}
+.prog-pill{font-size:10.5px; font-weight:800; padding:1px 7px; border-radius:20px}
+.no-kpi{font-size:12px; color:var(--sub); padding:14px 0; font-style:normal}
+.no-kpi span{display:inline-block; background:#eef1f3; padding:2px 9px; border-radius:6px; font-weight:700; font-size:11px}
+
+/* budget bars */
+.budrow{display:flex; align-items:center; gap:12px; padding:9px 0; border-top:1px solid var(--line)}
+.budrow:first-child{border-top:0}
+.budrow .bn{flex:0 0 150px; font-size:12.5px; font-weight:700}
+.budrow .bn small{display:block; font-weight:600; color:var(--sub); font-size:10.5px}
+.budrow .bb{flex:1; height:18px; background:#eef1f3; border-radius:5px; overflow:hidden}
+.budrow .bb > span{display:block; height:100%; border-radius:5px}
+.budrow .bv{flex:0 0 96px; text-align:right; font-size:12.5px; font-weight:800; font-variant-numeric:tabular-nums}
+
+/* survey bars */
+.sbar{margin:9px 0}
+.sbar .sl{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:3px}
+.sbar .sl .pct{font-weight:800; font-variant-numeric:tabular-nums}
+.sbar .st{height:14px; background:#eef1f3; border-radius:5px; overflow:hidden}
+.sbar .st > span{display:block; height:100%; border-radius:5px; background:#3b6e8c}
+.sbar.weak .st > span{background:#d99}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.card2{background:#fff; border:1px solid var(--line); border-radius:14px; padding:17px 18px}
+.card2 h3{font-size:14.5px; font-weight:800; margin-bottom:11px}
+.donut-wrap{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.legend{font-size:12px}
+.legend div{display:flex; align-items:center; gap:7px; margin:3px 0}
+.legend .ld{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
+.foot{margin-top:30px; padding-top:18px; border-top:1px solid var(--line); font-size:11.5px; color:var(--sub); line-height:1.7}
+.foot b{color:var(--ink)}
+.filterbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center}
+.filterbar .fl{font-size:12px; font-weight:700; color:var(--sub)}
+.chip{appearance:none; font-family:inherit; cursor:pointer; border:1px solid var(--line); background:#fff; border-radius:30px; padding:6px 13px; font-size:12.5px; font-weight:700; color:var(--sub)}
+.chip[aria-pressed="true"]{color:#fff; border-color:transparent}
+.chip:focus-visible{outline:2px solid #3b6e8c; outline-offset:2px}
+@media(max-width:720px){
+  .two{grid-template-columns:1fr}
+  .budrow .bn{flex-basis:110px}
+  .budrow .bv{flex-basis:76px}
+}
+@media(prefers-reduced-motion:reduce){
+  .bar>span,.panel{transition:none;animation:none}
+}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <span class="eyebrow">滋賀県日野町 / 第6次総合計画（令和3〜12年度）</span>
+  <h1>総合計画 進捗ダッシュボード</h1>
+  <div class="vision">将来像「時代の変化に対応し だれもが輝き ともに創るまち“日野”」</div>
+  <span class="proto-tag">プロトタイプ ／ 公開PDFから独自抽出・非公式</span>
+</div></header>
+
+<nav class="tabs"><div class="wrap" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="overview">概要</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="kpi">KPI・進捗</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="plan">実施計画</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="survey">住民の声</button>
+</div></nav>
+
+<main><div class="wrap">
+  <section class="panel" data-tab="overview" data-active="true" id="p-overview"></section>
+  <section class="panel" data-tab="kpi" id="p-kpi"></section>
+  <section class="panel" data-tab="plan" id="p-plan"></section>
+  <section class="panel" data-tab="survey" id="p-survey"></section>
+
+  <div class="foot">
+    <b>このダッシュボードについて</b><br>
+    第6次日野町総合計画の「基本計画（成果指標）」「実施計画（R7-R9）」「住民意識調査（R6実施）」を、公開PDFから独自に抽出し、34分野で横断できるよう試作したプロトタイプです。デジタル庁「ダッシュボードデザインガイドブック」の考え方を参考にしています。<br>
+    <b>注意：</b>数値はPDFからの読み取りのため誤差を含む可能性があります。正確な値は必ず日野町公式の元資料をご確認ください。本サイトは非公式の実証実験であり、予告なく変更する場合があります。<br>
+    出典：日野町公式サイト「総合計画」（基本計画・実施計画・住民意識調査結果）。
+  </div>
+</div></main>
+
+<script src="assets/data_bundle.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

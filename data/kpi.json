@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "title": "第6次日野町総合計画 成果指標（KPI）",
+    "note": "各分野の『指標（めざす姿の実現に向けた取組状況を把握するための数値）』表より抽出。基準値の年次は分野により異なる（R1/R2見込み/H27等）。目標値は中間=R7（令和7年度・5年目）、最終=R12（令和12年度）。一部分野は中間目標がR5・期末がR9/R12表記。出典：第6次日野町総合計画 第3部 基本計画。",
+    "baseline_caveat": "PDFからの読み取りのため、正確な値は必ず公式PDFをご確認ください。"
+  },
+  "pillars": [
+    {"id": 1, "name": "未来を担うひとづくり", "color": "#E4567B"},
+    {"id": 2, "name": "暮らしを支えるしごとづくり", "color": "#E8923A"},
+    {"id": 3, "name": "安心、助け合いのくらしづくり", "color": "#5BA84F"},
+    {"id": 4, "name": "住みたくなる都市基盤づくり", "color": "#3B9BC4"},
+    {"id": 5, "name": "みんなではぐくむ地域づくり", "color": "#8B6BB0"}
+  ],
+  "fields": [
+    {"id": 1, "name": "子ども・子育て", "pillar": 1, "policy": "子育てにやさしい風土づくり",
+     "indicators": [
+       {"name": "孤立しない子育てサポートの充実（保育園・幼稚園・認定こども園・子育て支援施設等利用率）", "unit": "%", "baseline": 82, "baseline_year": "R1", "target_mid": 85, "target_final": 90, "direction": "up"},
+       {"name": "保育所等待機児童数", "unit": "件", "baseline": 1, "baseline_year": "R1", "target_mid": 0, "target_final": 0, "direction": "down"},
+       {"name": "「この地域で、今後も子育てをしていきたい」割合", "unit": "%", "baseline": 95.3, "baseline_year": "R1", "target_mid": 95.8, "target_final": 96.3, "direction": "up"}
+     ]},
+    {"id": 2, "name": "学校教育", "pillar": 1, "policy": "生涯にわたる学びと活躍の推進",
+     "indicators": [
+       {"name": "自分に良いところがあると思う児童の割合（小学生）", "unit": "%", "baseline": 72.2, "baseline_year": "R2見込み", "target_mid": 75.0, "target_final": 78.0, "direction": "up"}
+     ]},
+    {"id": 3, "name": "地域で子どもを育む", "pillar": 1, "policy": "子育てにやさしい風土づくり", "indicators": []},
+    {"id": 4, "name": "生涯学習・スポーツ", "pillar": 1, "policy": "生涯にわたる学びと活躍の推進", "indicators": []},
+    {"id": 5, "name": "図書館", "pillar": 1, "policy": "生涯にわたる学びと活躍の推進", "indicators": []},
+    {"id": 6, "name": "歴史文化", "pillar": 1, "policy": "生涯にわたる学びと活躍の推進", "indicators": []},
+    {"id": 7, "name": "人権", "pillar": 1, "policy": "生涯にわたる学びと活躍の推進", "indicators": []},
+    {"id": 8, "name": "男女共同参画", "pillar": 1, "policy": "生涯にわたる学びと活躍の推進",
+     "indicators": [
+       {"name": "「働き方改革」に取り組む企業（の増加）数", "unit": "件", "baseline": 2, "baseline_year": "R1", "target_mid": 10, "target_final": 20, "direction": "up"},
+       {"name": "審議会・行政委員会等に参画する女性委員の割合", "unit": "%", "baseline": 28.3, "baseline_year": "R1", "target_mid": 35, "target_final": 40, "direction": "up"}
+     ]},
+    {"id": 9, "name": "農業", "pillar": 2, "policy": "生活の基盤となる町内産業の持続発展",
+     "indicators": [
+       {"name": "日野菜出荷量", "unit": "t", "baseline": 42, "baseline_year": "R2見込み", "target_mid": 56, "target_final": 70, "direction": "up"},
+       {"name": "人・農地プランの作成集落数", "unit": "集落", "baseline": 21, "baseline_year": "R2見込み", "target_mid": 25, "target_final": 30, "direction": "up"}
+     ]},
+    {"id": 10, "name": "森林・林業", "pillar": 2, "policy": "生活の基盤となる町内産業の持続発展",
+     "indicators": [
+       {"name": "森林境界明確化実施面積", "unit": "ha", "baseline": 50, "baseline_year": "R2見込み", "target_mid": 90, "target_final": 150, "direction": "up"}
+     ]},
+    {"id": 11, "name": "中小・小規模企業支援", "pillar": 2, "policy": "生活の基盤となる町内産業の持続発展",
+     "indicators": [
+       {"name": "創業者数", "unit": "人", "baseline": 2, "baseline_year": "H27-R1平均", "target_mid": 3, "target_final": 5, "direction": "up"},
+       {"name": "創業塾受講者数", "unit": "人", "baseline": 3, "baseline_year": "H27-R1平均", "target_mid": 5, "target_final": 7, "direction": "up"}
+     ]},
+    {"id": 12, "name": "企業・新産業の誘致", "pillar": 2, "policy": "生活の基盤となる町内産業の持続発展",
+     "indicators": [
+       {"name": "新規企業立地数", "unit": "件", "baseline": 1, "baseline_year": "R2見込み", "target_mid": 3, "target_final": 6, "direction": "up", "note": "基準値+2件(R7)、+5件(R12)"},
+       {"name": "企業用地区画数", "unit": "件", "baseline": 2, "baseline_year": "R2見込み", "target_mid": 2, "target_final": 10, "direction": "up", "note": "基準値+0件(R7)、+8件(R12)"}
+     ]},
+    {"id": 13, "name": "雇用・労働環境", "pillar": 2, "policy": "まちの魅力を活かした賑わいの創出",
+     "indicators": [
+       {"name": "地元高校生の町内企業就職率", "unit": "%", "baseline": 28.6, "baseline_year": "R1", "target_mid": 32.0, "target_final": 34.0, "direction": "up"},
+       {"name": "町内企業の有給休暇取得率", "unit": "%", "baseline": 47.8, "baseline_year": "R1", "target_mid": 49.0, "target_final": 50.0, "direction": "up"},
+       {"name": "町内企業に勤務する従業員のうち町内居住者の割合", "unit": "%", "baseline": 24.2, "baseline_year": "R1", "target_mid": 25.0, "target_final": 26.0, "direction": "up"}
+     ]},
+    {"id": 14, "name": "観光振興", "pillar": 2, "policy": "まちの魅力を活かした賑わいの創出",
+     "indicators": [
+       {"name": "農泊受入人数", "unit": "人", "baseline": 3563, "baseline_year": "R1", "target_mid": 4000, "target_final": 4500, "direction": "up"},
+       {"name": "観光入込客数", "unit": "人", "baseline": 740100, "baseline_year": "R1", "target_mid": 777000, "target_final": 815000, "direction": "up"},
+       {"name": "観光協会HPアクセス数", "unit": "件", "baseline": 89123, "baseline_year": "R1", "target_mid": 100000, "target_final": 110000, "direction": "up"}
+     ]},
+    {"id": 15, "name": "地元商工業の振興", "pillar": 2, "policy": "まちの魅力を活かした賑わいの創出",
+     "indicators": [
+       {"name": "商工会会員数", "unit": "件", "baseline": 527, "baseline_year": "R1", "target_mid": 535, "target_final": 540, "direction": "up"},
+       {"name": "町内商店数", "unit": "店舗", "baseline": 177, "baseline_year": "H28", "target_mid": 180, "target_final": 185, "direction": "up"},
+       {"name": "商品販売額", "unit": "百万円", "baseline": 22797, "baseline_year": "H28", "target_mid": 24000, "target_final": 25000, "direction": "up"}
+     ]},
+    {"id": 16, "name": "地域福祉", "pillar": 3, "policy": "健やかで思いやりのある地域共生社会の形成",
+     "indicators": [
+       {"name": "いきいきサロンの実施自治会数", "unit": "自治会", "baseline": 50, "baseline_year": "R2見込み", "target_mid": 52, "target_final": 53, "direction": "up"},
+       {"name": "民生委員・児童委員の相談支援件数", "unit": "件", "baseline": 1400, "baseline_year": "R2見込み", "target_mid": 1450, "target_final": 1500, "direction": "up"},
+       {"name": "生活困窮者自立支援新規相談件数", "unit": "件", "baseline": 12, "baseline_year": "R2見込み", "target_mid": 14, "target_final": 16, "direction": "up"},
+       {"name": "ひきこもりの居場所づくり", "unit": "か所", "baseline": 2, "baseline_year": "R2見込み", "target_mid": 3, "target_final": 3, "direction": "up"},
+       {"name": "公民館単位の協議体設置数", "unit": "か所", "baseline": 1, "baseline_year": "R2見込み", "target_mid": 6, "target_final": 7, "direction": "up"},
+       {"name": "地域支え合い活動に取り組む団体数", "unit": "団体", "baseline": 2, "baseline_year": "R2見込み", "target_mid": 12, "target_final": 22, "direction": "up"},
+       {"name": "高齢者交流サロン開催団体数", "unit": "団体", "baseline": 14, "baseline_year": "R2見込み", "target_mid": 24, "target_final": 34, "direction": "up"}
+     ]},
+    {"id": 17, "name": "健康・医療", "pillar": 3, "policy": "健やかで思いやりのある地域共生社会の形成",
+     "indicators": [
+       {"name": "食育に関心をもつ住民の割合", "unit": "%", "baseline": 67.1, "baseline_year": "R1", "target_mid": 68, "target_final": 70, "direction": "up"},
+       {"name": "特定健診受診率", "unit": "%", "baseline": 39.4, "baseline_year": "R1", "target_mid": 39.9, "target_final": 41.4, "direction": "up"}
+     ]},
+    {"id": 18, "name": "高齢者福祉", "pillar": 3, "policy": "健やかで思いやりのある地域共生社会の形成",
+     "indicators": [
+       {"name": "高齢者への相談対応件数", "unit": "件", "baseline": 1400, "baseline_year": "R2見込み", "target_mid": 1800, "target_final": 2200, "direction": "up"},
+       {"name": "高齢者交流サロン開催団体数（再掲）", "unit": "団体", "baseline": 14, "baseline_year": "R2見込み", "target_mid": 24, "target_final": 34, "direction": "up"},
+       {"name": "介護予防ボランティア養成数（延べ）", "unit": "人", "baseline": 319, "baseline_year": "R2見込み", "target_mid": 385, "target_final": 450, "direction": "up"},
+       {"name": "認知症キャラバンメイト数", "unit": "人", "baseline": 48, "baseline_year": "R2見込み", "target_mid": 75, "target_final": 100, "direction": "up"},
+       {"name": "認知症サポーター養成講座修了者数（延べ）", "unit": "人", "baseline": 7500, "baseline_year": "R2見込み", "target_mid": 9500, "target_final": 11500, "direction": "up"}
+     ]},
+    {"id": 19, "name": "障がい福祉", "pillar": 3, "policy": "健やかで思いやりのある地域共生社会の形成",
+     "indicators": [
+       {"name": "障がい福祉サービス受給者数", "unit": "人", "baseline": 209, "baseline_year": "R2見込み", "target_mid": 220, "target_final": 240, "direction": "up"},
+       {"name": "町内グループホーム等の定員数", "unit": "人", "baseline": 29, "baseline_year": "R2見込み", "target_mid": 44, "target_final": 50, "direction": "up"}
+     ]},
+    {"id": 20, "name": "循環型社会", "pillar": 3, "policy": "人と豊かな自然との共生",
+     "indicators": [
+       {"name": "資源ごみの量", "unit": "t", "baseline": 214.57, "baseline_year": "R1", "target_mid": 200, "target_final": 200, "direction": "neutral"},
+       {"name": "一日一人あたり可燃ごみ量", "unit": "g", "baseline": 495, "baseline_year": "R1", "target_mid": 474, "target_final": 457, "direction": "down"}
+     ]},
+    {"id": 21, "name": "環境共生", "pillar": 3, "policy": "人と豊かな自然との共生",
+     "indicators": [
+       {"name": "清掃活動の参加人数", "unit": "人", "baseline": 256, "baseline_year": "R1", "target_mid": 260, "target_final": 260, "direction": "up"},
+       {"name": "河川愛護事業参加人数", "unit": "人", "baseline": 3870, "baseline_year": "R2", "target_mid": 3900, "target_final": 3900, "direction": "up"}
+     ]},
+    {"id": 22, "name": "防犯・交通安全", "pillar": 4, "policy": "災害や危機への備えの強化",
+     "indicators": [
+       {"name": "刑法犯認知件数", "unit": "件", "baseline": 55, "baseline_year": "R1", "target_mid": 55, "target_final": 55, "direction": "down"},
+       {"name": "消費相談件数", "unit": "件", "baseline": 41, "baseline_year": "R1", "target_mid": 45, "target_final": 45, "direction": "neutral"}
+     ]},
+    {"id": 23, "name": "防災・消防", "pillar": 4, "policy": "災害や危機への備えの強化",
+     "indicators": [
+       {"name": "消防団団員数", "unit": "人", "baseline": 185, "baseline_year": "R2見込み", "target_mid": 185, "target_final": 185, "direction": "neutral"},
+       {"name": "自主防災組織の組織数", "unit": "組織", "baseline": 15, "baseline_year": "R2見込み", "target_mid": 25, "target_final": 40, "direction": "up"}
+     ]},
+    {"id": 24, "name": "都市計画", "pillar": 4, "policy": "居心地のよい都市環境の整備",
+     "indicators": [
+       {"name": "道路整備を計画している箇所の整備済延長", "unit": "km", "baseline": 0.75, "baseline_year": "R1", "target_mid": 1.94, "target_final": 3.36, "direction": "up", "note": "中間R5/期末R9"},
+       {"name": "橋梁長寿命化計画に基づく健全な橋梁", "unit": "橋", "baseline": 19, "baseline_year": "R1", "target_mid": 31, "target_final": 43, "direction": "up", "note": "中間R5/期末R9"},
+       {"name": "町道改良地区", "unit": "地区", "baseline": 1, "baseline_year": "R2", "target_mid": 1, "target_final": 1, "direction": "up", "note": "中間R7/期末R12"},
+       {"name": "町道舗装延長（修繕）", "unit": "km", "baseline": 2.32, "baseline_year": "R1", "target_mid": 4.32, "target_final": 6.32, "direction": "up", "note": "中間R5/期末R9"},
+       {"name": "市街化区域における地区計画区域の空閑地面積", "unit": "ha", "baseline": 7.9, "baseline_year": "R1", "target_mid": 5.0, "target_final": 3.0, "direction": "down", "note": "中間R7/期末R12"}
+     ]},
+    {"id": 25, "name": "公共交通", "pillar": 4, "policy": "居心地のよい都市環境の整備",
+     "indicators": [
+       {"name": "「近江バス（日八線）」の利用者数", "unit": "人", "baseline": 223300, "baseline_year": "R1", "target_mid": 230000, "target_final": 240000, "direction": "up"},
+       {"name": "「町営バス」の利用者数", "unit": "人", "baseline": 51043, "baseline_year": "R1", "target_mid": 52000, "target_final": 53000, "direction": "up"},
+       {"name": "「近江バス（日八線）」「町営バス」の住民1人あたりの利用回数", "unit": "回/人", "baseline": 12.8, "baseline_year": "R1", "target_mid": 14.0, "target_final": 16.0, "direction": "up"},
+       {"name": "町営バスの利用者の少ない運行便数の割合", "unit": "%", "baseline": 36, "baseline_year": "R2", "target_mid": 25, "target_final": 15, "direction": "down"},
+       {"name": "町営バスの収支率", "unit": "%", "baseline": 8.7, "baseline_year": "R1", "target_mid": 10.0, "target_final": 12.0, "direction": "up"}
+     ]},
+    {"id": 26, "name": "住環境", "pillar": 4, "policy": "居心地のよい都市環境の整備",
+     "indicators": [
+       {"name": "家屋の耐震診断件数", "unit": "件", "baseline": 3, "baseline_year": "R1", "target_mid": 7, "target_final": 10, "direction": "up"},
+       {"name": "家屋の耐震化補助件数", "unit": "件", "baseline": 0, "baseline_year": "R1", "target_mid": 2, "target_final": 3, "direction": "up"},
+       {"name": "危険ブロック塀解体補助件数", "unit": "件", "baseline": 2, "baseline_year": "R1", "target_mid": 5, "target_final": 8, "direction": "up"},
+       {"name": "家屋の耐震化率", "unit": "%", "baseline": 68.7, "baseline_year": "H27", "target_mid": 95, "target_final": 98, "direction": "up"},
+       {"name": "町営住宅入居率", "unit": "%", "baseline": 88, "baseline_year": "R1", "target_mid": 90, "target_final": 95, "direction": "up"},
+       {"name": "危険空き家の除却等の改善件数", "unit": "件", "baseline": 2, "baseline_year": "R1", "target_mid": 10, "target_final": 20, "direction": "up"},
+       {"name": "都市公園利用者数", "unit": "人", "baseline": 56495, "baseline_year": "R1", "target_mid": 90000, "target_final": 85000, "direction": "up"}
+     ]},
+    {"id": 27, "name": "上水道・下水道", "pillar": 4, "policy": "居心地のよい都市環境の整備",
+     "indicators": [
+       {"name": "上水道基幹管路の耐震化率", "unit": "%", "baseline": 9.73, "baseline_year": "R1", "target_mid": 27.41, "target_final": 40.66, "direction": "up"}
+     ]},
+    {"id": 28, "name": "景観", "pillar": 4, "policy": "居心地のよい都市環境の整備",
+     "indicators": [
+       {"name": "近隣景観形成協定に取り組む地域数", "unit": "件", "baseline": 0, "baseline_year": "R1", "target_mid": 1, "target_final": 2, "direction": "up"}
+     ]},
+    {"id": 29, "name": "情報化社会への対応", "pillar": 4, "policy": "居心地のよい都市環境の整備",
+     "indicators": [
+       {"name": "「日野め～る」の登録者数", "unit": "人", "baseline": 3157, "baseline_year": "R2見込み", "target_mid": 3600, "target_final": 4000, "direction": "up"},
+       {"name": "町ホームページアクセス数", "unit": "件", "baseline": 3065615, "baseline_year": "R2見込み", "target_mid": 3400000, "target_final": 3800000, "direction": "up"}
+     ]},
+    {"id": 30, "name": "進取のまちづくり", "pillar": 5, "policy": "住民が主人公の地域形成",
+     "indicators": [
+       {"name": "まちづくり計画の策定自治会数（累計）", "unit": "自治会", "baseline": 16, "baseline_year": "R1", "target_mid": 24, "target_final": 32, "direction": "up", "note": "中間R7/期末R12"},
+       {"name": "協働のまちづくりができていると思う人の割合", "unit": "%", "baseline": 44.9, "baseline_year": "H30", "target_mid": 50, "target_final": 55, "direction": "up", "note": "中間R6/期末R10"},
+       {"name": "公民館利用者数", "unit": "人", "baseline": 86695, "baseline_year": "R1", "target_mid": 88000, "target_final": 90000, "direction": "up", "note": "中間R7/期末R12"}
+     ]},
+    {"id": 31, "name": "交流・移住", "pillar": 5, "policy": "住民が主人公の地域形成",
+     "indicators": [
+       {"name": "定住に関する相談件数", "unit": "件", "baseline": 22, "baseline_year": "R1", "target_mid": 25, "target_final": 30, "direction": "up"},
+       {"name": "空き家・空き地情報登録制度での移住定住者数（累計）", "unit": "人", "baseline": 142, "baseline_year": "R1", "target_mid": 230, "target_final": 320, "direction": "up"}
+     ]},
+    {"id": 32, "name": "公共施設", "pillar": 5, "policy": "時代の変化に柔軟に対応できる行財政運営", "indicators": []},
+    {"id": 33, "name": "行政運営", "pillar": 5, "policy": "時代の変化に柔軟に対応できる行財政運営",
+     "indicators": [
+       {"name": "派遣型研修 参加率", "unit": "%", "baseline": 45, "baseline_year": "R2見込み", "target_mid": 48, "target_final": 50, "direction": "up"},
+       {"name": "独自研修開催数", "unit": "回", "baseline": 6, "baseline_year": "R2見込み", "target_mid": 8, "target_final": 10, "direction": "up"}
+     ]},
+    {"id": 34, "name": "財政基盤", "pillar": 5, "policy": "時代の変化に柔軟に対応できる行財政運営",
+     "indicators": [
+       {"name": "財政調整基金現在高", "unit": "百万円", "baseline": 1052, "baseline_year": "R1", "target_mid": 1100, "target_final": 1200, "direction": "up"},
+       {"name": "減債基金現在高", "unit": "百万円", "baseline": 473, "baseline_year": "R1", "target_mid": 550, "target_final": 600, "direction": "up"},
+       {"name": "町税収納率（現年度分）", "unit": "%", "baseline": 99.55, "baseline_year": "R1", "target_mid": 99.60, "target_final": 99.65, "direction": "up"},
+       {"name": "町税収納率（滞納繰越分）", "unit": "%", "baseline": 21.19, "baseline_year": "R1", "target_mid": 23.00, "target_final": 25.00, "direction": "up"},
+       {"name": "滞納繰越分調定額", "unit": "千円", "baseline": 82092, "baseline_year": "R2", "target_mid": 70000, "target_final": 58000, "direction": "down"}
+     ]}
+  ]
+}

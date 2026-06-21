@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "title": "第6次日野町総合計画にかかる 住民意識調査結果（令和6年実施）",
+    "survey": {"target": "町内18歳以上 2,500人（無作為抽出）", "period": "R6.8.27〜9.24", "responses": 1206, "response_rate": 48.24, "web_rate": 16.38},
+    "note": "数値は有効回答（n=1,206）に対する％。出典：住民意識調査結果報告（概要）。"
+  },
+  "happiness": {"average": 6.5, "n": 1182, "note": "10点満点。6点以上が6割超、5点が4分の1超"},
+  "town_strengths": {
+    "title": "日野町の良いところ（そう思う＋ややそう思う 上位）",
+    "items": [
+      {"label": "自然災害が少ない", "value": 76.6},
+      {"label": "米や野菜がおいしい", "value": 74.7},
+      {"label": "自然環境が良い", "value": 70.1},
+      {"label": "これからも住み続けたい町だ", "value": 64.2},
+      {"label": "愛着を感じる町だ", "value": 65.0},
+      {"label": "住みやすい町だ", "value": 62.4},
+      {"label": "スポーツ施設が多い", "value": 12.1, "weak": true},
+      {"label": "公共交通の便が良い", "value": 10.4, "weak": true}
+    ]
+  },
+  "satisfaction": {
+    "title": "町政の満足度（満足＋やや満足）",
+    "items": [
+      {"label": "行政（役場）の信頼度", "value": 63.5},
+      {"label": "行政サービスの水準", "value": 59.5},
+      {"label": "行財政についての情報公開", "value": 55.6},
+      {"label": "健全で効率的な財政運営", "value": 54.0},
+      {"label": "効率的な行政の運営・職員の能力", "value": 50.9},
+      {"label": "住民自治のまちづくり、ルールづくり", "value": 47.1, "weak": true},
+      {"label": "住民からの要望の反映", "value": 43.3, "weak": true},
+      {"label": "議会の役割", "value": 37.6, "weak": true}
+    ]
+  },
+  "collaboration": {
+    "interest": [
+      {"label": "関心がある", "value": 14.0},
+      {"label": "やや関心がある", "value": 40.4},
+      {"label": "あまり関心がない", "value": 35.1},
+      {"label": "関心がない", "value": 7.2},
+      {"label": "不明・無回答", "value": 3.3}
+    ],
+    "achieved": [
+      {"label": "そう思う", "value": 3.9},
+      {"label": "ややそう思う", "value": 41.4},
+      {"label": "あまり思わない", "value": 40.1},
+      {"label": "思わない", "value": 5.6},
+      {"label": "不明・無回答", "value": 9.0}
+    ]
+  },
+  "info_source": {
+    "title": "町政情報の入手方法（複数回答・件数）",
+    "items": [
+      {"label": "広報ひの", "value": 1009},
+      {"label": "回覧板", "value": 716},
+      {"label": "日野町ホームページ", "value": 306},
+      {"label": "日野め～る", "value": 318},
+      {"label": "日野町防災アプリ", "value": 248},
+      {"label": "新聞", "value": 214},
+      {"label": "テレビ", "value": 118},
+      {"label": "各種SNS", "value": 53},
+      {"label": "ラジオ", "value": 21},
+      {"label": "その他", "value": 38}
+    ]
+  },
+  "respondents": {
+    "gender": [
+      {"label": "女性", "value": 48.2}, {"label": "男性", "value": 44.9},
+      {"label": "その他", "value": 0.2}, {"label": "答えたくない", "value": 3.3}, {"label": "不明・無回答", "value": 3.5}
+    ],
+    "age": [
+      {"label": "19歳以下", "value": 1.2}, {"label": "20〜29歳", "value": 4.7},
+      {"label": "30〜39歳", "value": 8.6}, {"label": "40〜49歳", "value": 13.4},
+      {"label": "50〜59歳", "value": 14.7}, {"label": "60〜69歳", "value": 19.1},
+      {"label": "70〜79歳", "value": 21.3}, {"label": "80〜89歳", "value": 10.2},
+      {"label": "90歳以上", "value": 2.7}, {"label": "不明・無回答", "value": 4.1}
+    ],
+    "district": [
+      {"label": "日野", "value": 36.3}, {"label": "必佐", "value": 22.3},
+      {"label": "南比都佐", "value": 10.4}, {"label": "西大路", "value": 9.5},
+      {"label": "東桜谷", "value": 6.9}, {"label": "西桜谷", "value": 5.9},
+      {"label": "鎌掛", "value": 3.6}, {"label": "わからない", "value": 0.4}, {"label": "不明・無回答", "value": 4.6}
+    ],
+    "household": [
+      {"label": "二世代同居", "value": 43.1}, {"label": "夫婦のみ", "value": 24.7},
+      {"label": "三世代同居", "value": 14.6}, {"label": "ひとり暮らし", "value": 11.4},
+      {"label": "その他", "value": 2.3}, {"label": "不明・無回答", "value": 3.9}
+    ],
+    "residency": [
+      {"label": "生まれてからずっと住んでいる", "value": 46.8},
+      {"label": "転入してきた", "value": 38.8},
+      {"label": "Uターン", "value": 9.8},
+      {"label": "不明・無回答", "value": 4.7}
+    ]
+  },
+  "happiness_factors": {
+    "title": "「幸せ」でいるために大切なこと（複数回答・件数）",
+    "items": [
+      {"label": "健康", "value": 1086}, {"label": "家族関係", "value": 750},
+      {"label": "経済的なゆとり", "value": 722}, {"label": "精神的なゆとり", "value": 708},
+      {"label": "趣味や楽しみ", "value": 604}, {"label": "自由な時間", "value": 591},
+      {"label": "友人関係", "value": 504}, {"label": "地域の人たちとの関係", "value": 399},
+      {"label": "安定した仕事", "value": 391}, {"label": "仕事のやりがい", "value": 251},
+      {"label": "職場の人との関係", "value": 225}, {"label": "社会や他人への貢献", "value": 177}
+    ]
+  }
+}

@@ -78,8 +78,8 @@
     const el=document.getElementById('p-kpi');
     const fields = KPI.fields.filter(f=> kpiFilter===0 || f.pillar===kpiFilter);
     const chips = `<div class="filterbar"><span class="fl">政策の柱で絞り込み：</span>
-      <button class="chip" data-pf="0" aria-pressed="${kpiFilter===0}" style="${kpiFilter===0?'background:var(--blue900)':''}">すべて</button>
-      ${KPI.pillars.map(p=>`<button class="chip" data-pf="${p.id}" aria-pressed="${kpiFilter===p.id}" style="${kpiFilter===p.id?'background:'+p.color:''}">${p.id}. ${p.name}</button>`).join('')}
+      <button class="chip" data-pf="0" aria-pressed="${kpiFilter===0}">すべて</button>
+      ${KPI.pillars.map(p=>`<button class="chip" data-pf="${p.id}" aria-pressed="${kpiFilter===p.id}"><span class="cdot" style="background:${p.color}"></span>${p.id}. ${p.name}</button>`).join('')}
     </div>`;
     const cards = fields.map(f=>{
       const c=PC[f.pillar].color;

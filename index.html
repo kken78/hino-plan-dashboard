@@ -145,8 +145,10 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
 .foot b{color:var(--ink)}
 .filterbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center}
 .filterbar .fl{font-size:12px; font-weight:700; color:var(--sub)}
-.chip{appearance:none; font-family:inherit; cursor:pointer; border:1px solid var(--line); background:#fff; border-radius:4px; padding:6px 13px; font-size:12.5px; font-weight:700; color:var(--sub)}
-.chip[aria-pressed="true"]{color:#fff; border-color:transparent}
+.chip{appearance:none; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:4px; padding:6px 13px; font-size:12.5px; font-weight:700; color:var(--sub)}
+.chip .cdot{width:9px; height:9px; border-radius:2px; flex:0 0 auto}
+.chip[aria-pressed="true"]{color:#fff; border-color:transparent; background:var(--navy)}
+.chip[aria-pressed="true"] .cdot{box-shadow:0 0 0 1.5px #fff}
 .chip:focus-visible{outline:2px solid var(--blue900); outline-offset:2px}
 @media(max-width:720px){
   .two{grid-template-columns:1fr}

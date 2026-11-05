@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第6次日野町総合計画 進捗ダッシュボード（プロトタイプ）</title>
-<meta property="og:title" content="第6次日野町総合計画 進捗ダッシュボード">
-<meta property="og:description" content="KPI・実施計画・住民意識調査を34分野で横断する進捗ダッシュボード（プロトタイプ）">
+<title>第6次日野町総合計画 指標と事業費（プロトタイプ）</title>
+<meta property="og:title" content="第6次日野町総合計画 指標と事業費">
+<meta property="og:description" content="KPI・実施計画・住民意識調査を34分野で横断するダッシュボード（プロトタイプ）">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kken78.github.io/hino-plan-dashboard/">
 <meta property="og:image" content="https://kken78.github.io/hino-plan-dashboard/ogp.png">
@@ -163,14 +163,14 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
 <body>
 <header class="site"><div class="wrap">
   <span class="eyebrow">滋賀県日野町 / 第6次総合計画（令和3〜12年度）</span>
-  <h1>総合計画 進捗ダッシュボード</h1>
+  <h1>総合計画 指標と事業費</h1>
   <div class="vision">将来像「時代の変化に対応し だれもが輝き ともに創るまち“日野”」</div>
   <span class="proto-tag">プロトタイプ ／ 公開PDFから独自抽出・非公式</span>
 </div></header>
 
 <nav class="tabs"><div class="wrap" role="tablist">
   <button class="tab" role="tab" aria-selected="true" data-tab="overview">概要</button>
-  <button class="tab" role="tab" aria-selected="false" data-tab="kpi">KPI・進捗</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="kpi">成果指標</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="plan">実施計画</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="survey">住民の声</button>
 </div></nav>
@@ -185,12 +185,13 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
     <b>このダッシュボードについて</b><br>
     第6次日野町総合計画の「基本計画（成果指標）」「実施計画（R7-R9）」「住民意識調査（R6実施）」を、公開PDFから独自に抽出し、34分野で横断できるよう試作したプロトタイプ（提示型ダッシュボード）です。デジタル庁「ダッシュボードデザインの実践ガイドブック」の設計原則（全体→部分の構造、比較対象の併記、誤解を生まない表現、色のみに依存しない識別、メタ情報の明記）と、同デザインシステムのカラーパレット（Blue）に準拠しています。<br>
     <b>データの定義・時点：</b>成果指標は基準値→中間目標(R7)→最終目標(R12)の3点。基準値の年次は分野によりR1/R2見込み/H27等と異なります（各指標に併記）。実施計画は概算事業費の3年計（令和7〜9年度）。住民意識調査は令和6年実施・有効回答1,206件。<br>
-    <b>更新日：</b>2026-06（プロトタイプ）。<b>注意：</b>数値はPDFからの読み取りのため誤差を含む可能性があります。正確な値は必ず日野町公式の元資料をご確認ください。本サイトは非公式の実証実験であり、予告なく変更する場合があります。<br>
+    <b>更新日：</b>2026-11（プロトタイプ）。<b>注意：</b>数値はPDFからの読み取りのため誤差を含む可能性があります。正確な値は必ず日野町公式の元資料をご確認ください。本サイトは非公式の実証実験であり、予告なく変更する場合があります。<br>
     出典：日野町公式サイト「総合計画」（基本計画・実施計画・住民意識調査結果）。<br>
     <span style="display:inline-block;margin-top:6px">元データ（JSON）：</span>
     <span class="datalinks" style="display:inline-flex">
       <a href="data/kpi.json">kpi.json</a><a href="data/plan.json">plan.json</a><a href="data/survey.json">survey.json</a>
     </span>
+    <br>ほかのダッシュボード：<a href="https://kken78.github.io/hino-portal/">日野町データポータル（非公式）</a>
   </div>
 </div></main>
 

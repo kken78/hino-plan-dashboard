@@ -1,4 +1,4 @@
-/* ===== 第6次日野町総合計画 進捗ダッシュボード ===== */
+/* ===== 第6次日野町総合計画 指標と事業費 ===== */
 (function(){
   const PC = {}; KPI.pillars.forEach(p=>PC[p.id]=p);
   const fmt = n => n==null ? '—' : n.toLocaleString('ja-JP');
@@ -18,7 +18,7 @@
 
   /* 達成度（向き考慮）: 基準→中間目標 をゴールとし、現在地は持っていないので
      「目標が基準からどれだけ改善方向に動くか＝目標の野心度」を中間目標到達=100%として表示する。
-     現状値が無いため、ここでは基準値→R7目標の進捗バーは『目標の位置』を示す。 */
+     現状値が無いため、ここでは基準値→R7目標のバーは『目標の位置』を示す。 */
   function targetProgress(ind){
     // 改善方向に向けて 基準→最終目標 のスパンの中で 中間目標(R7)がどこか（％）
     const b=ind.baseline, mid=ind.target_mid, fin=ind.target_final;
@@ -43,10 +43,10 @@
     const pt=pillarTotals();
     const maxPt=Math.max(...Object.values(pt));
     el.innerHTML = `
-      <h2 class="sec">計画のいま（令和7年度＝10年計画の5年目・中間年）</h2>
-      <p class="lead">第6次総合計画は令和3〜12年度の10年計画。今年度は中間目標（R7）の評価年にあたります。3つの情報源を34分野で横断します。まず全体像を示し、各タブで詳細に辿れる構成です。</p>
+      <h2 class="sec">収録している資料の時点</h2>
+      <p class="lead">成果指標は基準値と目標値（中間目標＝令和7年度、最終目標＝令和12年度）で、実績値は含みません。実施計画は令和7〜9年度、住民意識調査は令和6年8〜9月実施です。一部の指標は目標の年次が異なります（中間・最終が令和5・9年度、令和6・10年度のもの）。<br>第6次総合計画は令和3〜12年度の10年計画。3つの情報源を34分野で横断します。まず全体像を示し、各タブで詳細に辿れる構成です。</p>
       <div class="stats">
-        <div class="stat highlight"><div class="k">計画の進捗（経過年）</div><div class="v">5<small>/10年目</small></div><div class="note">R3〜R12・中間目標(R7)の評価年</div></div>
+        <div class="stat highlight"><div class="k">計画期間</div><div class="v">10<small>年</small></div><div class="note">R3〜R12・中間目標はR7</div></div>
         <div class="stat"><div class="k">成果指標(KPI)</div><div class="v">${kpiCount}<small>指標</small></div><div class="note">${kpiFields}/34分野で設定</div></div>
         <div class="stat"><div class="k">実施計画 事業費（R7-R9・3年計）</div><div class="v">${yen(budget)}</div><div class="note">概算事業費の合計</div></div>
         <div class="stat"><div class="k">住民意識調査 回収率（R6）</div><div class="v">${SURVEY.meta.survey.response_rate}<small>%</small></div><div class="note">有効回答 ${fmt(SURVEY.meta.survey.responses)}件</div></div>
@@ -68,7 +68,7 @@
       </div>
 
       <p class="lead" style="margin-top:18px">
-        ※ 各タブで詳細を確認できます。<b>KPI・進捗</b>＝分野別の成果指標と目標、<b>実施計画</b>＝事業と予算、<b>住民の声</b>＝意識調査の結果。
+        ※ 各タブで詳細を確認できます。<b>成果指標</b>＝分野別の成果指標と目標、<b>実施計画</b>＝事業と予算、<b>住民の声</b>＝意識調査の結果。
       </p>`;
   }
 
@@ -112,8 +112,8 @@
       </div>`;
     }).join('');
     el.innerHTML=`
-      <h2 class="sec">KPI・進捗 — 分野別の成果指標（基本計画）</h2>
-      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の進捗ではありません。改善の向きは指標ごとに異なるため、矢印と文言で示しています（▲増加で改善 ／ ▼減少で改善 ／ ＝維持・中立）。実績値が公表されれば、達成度（達成／未達）を色で重ねられます。基準値の年次は分野により異なります（各指標に併記）。</p>
+      <h2 class="sec">成果指標 — 分野別の基準値と目標値（基本計画）</h2>
+      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このダッシュボードは各指標の実績値を収録していません。改善の向きは指標ごとに異なるため、矢印と文言で示しています（▲増加で改善 ／ ▼減少で改善 ／ ＝維持・中立）。実績値が公表されれば、達成度（達成／未達）を色で重ねられます。基準値の年次は分野により異なります（各指標に併記）。</p>
       ${chips}
       <div class="grid">${cards}</div>`;
     el.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{kpiFilter=+b.dataset.pf; renderKpi(); animateBars(el);});

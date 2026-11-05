@@ -27,14 +27,14 @@
     <rect x="80" y="138" width="64" height="4" rx="2" fill="#8fc4dd"/>
 
     <!-- タイトル -->
-    <text x="78" y="226" fill="#ffffff" font-size="72" font-weight="900" letter-spacing="1">総合計画</text>
-    <text x="78" y="310" fill="#ffffff" font-size="60" font-weight="900" letter-spacing="0">指標と事業費</text>
+    <text x="78" y="226" fill="#ffffff" font-size="72" font-weight="700" letter-spacing="1">総合計画</text>
+    <text x="78" y="310" fill="#ffffff" font-size="60" font-weight="700" letter-spacing="0">指標と事業費</text>
 
     <!-- 将来像 -->
     <text x="82" y="380" fill="#dceaf2" font-size="25" font-weight="500">「だれもが輝き ともに創るまち&#8220;日野&#8221;」</text>
 
     <!-- メトリクス行 -->
-    <g font-weight="900">
+    <g font-weight="700">
       <text x="82" y="500" fill="#ffffff" font-size="58">34</text>
       <text x="148" y="500" fill="#bcd6e4" font-size="24" font-weight="700">分野</text>
       <text x="262" y="500" fill="#ffffff" font-size="58">79</text>
@@ -50,8 +50,8 @@
     <rect x="760" y="150" width="372" height="330" rx="20" fill="#ffffff"/>
   </g>
   <g font-family="Noto Sans CJK JP, sans-serif">
-    <text x="790" y="196" fill="#23303a" font-size="20" font-weight="800">成果指標</text>
-    <text x="790" y="220" fill="#5c6b75" font-size="14" font-weight="600">基準値 → 中間目標(R7) → 最終(R12)</text>
+    <text x="790" y="196" fill="#23303a" font-size="20" font-weight="700">成果指標</text>
+    <text x="790" y="220" fill="#5c6b75" font-size="14" font-weight="500">基準値 → 中間目標(R7) → 最終(R12)</text>
 
     <!-- バー群（単色。実績値は収録していないため状態色は使わない） -->
     <!-- 1 -->
@@ -83,5 +83,5 @@
   </g>
 
   <!-- 下部 プロトタイプ帯 -->
-  <text x="80" y="600" font-family="Noto Sans CJK JP, sans-serif" fill="#86abc0" font-size="16" font-weight="600">プロトタイプ ／ 公開データから作成（非公式・実証実験）</text>
+  <text x="80" y="600" font-family="Noto Sans CJK JP, sans-serif" fill="#86abc0" font-size="16" font-weight="500">プロトタイプ ／ 公開データから作成（非公式・実証実験）</text>
 </svg>

@@ -51,6 +51,11 @@ header.site .vision{font-size:13px; opacity:.92; margin-top:2px}
   display:inline-block; margin-top:8px; font-size:11px; background:rgba(255,255,255,.16);
   padding:3px 10px; border-radius:4px; width:fit-content;
 }
+/* ポータルへの戻りリンク */
+.portal-back{background:var(--control); border-bottom:1px solid var(--line); font-size:12px; line-height:1.5}
+.portal-back .wrap{padding-top:6px; padding-bottom:6px}
+.portal-back a{text-decoration:none}
+.portal-back a:hover{text-decoration:underline}
 
 /* tabs */
 nav.tabs{position:sticky; top:0; z-index:30; background:#fff; border-bottom:1px solid var(--line)}
@@ -167,6 +172,7 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
   <div class="vision">将来像「時代の変化に対応し だれもが輝き ともに創るまち“日野”」</div>
   <span class="proto-tag">プロトタイプ ／ 公開PDFから独自抽出・非公式</span>
 </div></header>
+<div class="portal-back"><div class="wrap"><a href="https://kken78.github.io/hino-portal/">← 日野町データポータル</a></div></div>
 
 <nav class="tabs"><div class="wrap" role="tablist">
   <button class="tab" role="tab" aria-selected="true" data-tab="overview">概要</button>
@@ -183,6 +189,7 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
 
   <div class="foot">
     <b>このダッシュボードについて</b><br>
+    このページは、滋賀県日野町 政策参与の東健二郎が、個人として作成した試作です。日野町の公式のサイトではなく、町の見解を示すものでもありません。<br>
     第6次日野町総合計画の「基本計画（成果指標）」「実施計画（R7-R9）」「住民意識調査（R6実施）」を、公開PDFから独自に抽出し、34分野で横断できるよう試作したプロトタイプ（提示型ダッシュボード）です。デジタル庁「ダッシュボードデザインの実践ガイドブック」の設計原則（全体→部分の構造、比較対象の併記、誤解を生まない表現、色のみに依存しない識別、メタ情報の明記）と、同デザインシステムのカラーパレット（Blue）に準拠しています。<br>
     <b>データの定義・時点：</b>成果指標は基準値→中間目標(R7)→最終目標(R12)の3点。基準値の年次は分野によりR1/R2見込み/H27等と異なります（各指標に併記）。実施計画は概算事業費の3年計（令和7〜9年度）。住民意識調査は令和6年実施・有効回答1,206件。<br>
     <b>更新日：</b>2026-11（プロトタイプ）。<b>注意：</b>数値はPDFからの読み取りのため誤差を含む可能性があります。正確な値は必ず日野町公式の元資料をご確認ください。本サイトは非公式の実証実験であり、予告なく変更する場合があります。<br>

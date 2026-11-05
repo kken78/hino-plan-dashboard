@@ -28,7 +28,7 @@
 
     <!-- タイトル -->
     <text x="78" y="226" fill="#ffffff" font-size="72" font-weight="900" letter-spacing="1">総合計画</text>
-    <text x="78" y="310" fill="#ffffff" font-size="60" font-weight="900" letter-spacing="0">進捗ダッシュボード</text>
+    <text x="78" y="310" fill="#ffffff" font-size="60" font-weight="900" letter-spacing="0">指標と事業費</text>
 
     <!-- 将来像 -->
     <text x="82" y="380" fill="#dceaf2" font-size="25" font-weight="500">「だれもが輝き ともに創るまち&#8220;日野&#8221;」</text>
@@ -42,7 +42,7 @@
       <text x="430" y="500" fill="#ffffff" font-size="58">3</text>
       <text x="466" y="500" fill="#bcd6e4" font-size="24" font-weight="700">情報源を統合</text>
     </g>
-    <text x="84" y="536" fill="#9fc0d2" font-size="19" font-weight="500">KPI・進捗　/　実施計画　/　住民意識調査</text>
+    <text x="84" y="536" fill="#9fc0d2" font-size="19" font-weight="500">成果指標　/　実施計画　/　住民意識調査</text>
   </g>
 
   <!-- 右：ミニ・ダッシュボードカード -->
@@ -50,7 +50,7 @@
     <rect x="760" y="150" width="372" height="330" rx="20" fill="#ffffff"/>
   </g>
   <g font-family="Noto Sans CJK JP, sans-serif">
-    <text x="790" y="196" fill="#23303a" font-size="20" font-weight="800">KPI・進捗</text>
+    <text x="790" y="196" fill="#23303a" font-size="20" font-weight="800">成果指標</text>
     <text x="790" y="220" fill="#5c6b75" font-size="14" font-weight="600">基準値 → 中間目標(R7) → 最終(R12)</text>
 
     <!-- バー群（達成度イメージ） -->

@@ -33,12 +33,11 @@
 ```
 index.html        … 本体（構造とスタイル）
 README.md         … 本ファイル
-ogp.png           … SNS共有時のサムネイル画像（1200×630px）
+og.png            … SNS共有時のサムネイル画像（OGP画像、1200×630px）
 assets/
   app.js          … 描画ロジック・タブ制御・達成度計算
   data_bundle.js  … data/ のJSONを結合した埋め込みデータ（index.htmlはこれを読み込む）
-  ogp.png         … OGP画像（同上）
-  ogp.svg         … OGP画像の編集元（差し替え用）
+  og.svg          … OGP画像の編集元（差し替え用）
 data/
   kpi.json        … 全34分野の成果指標
   plan.json       … 実施計画（分野別予算・主要事業）

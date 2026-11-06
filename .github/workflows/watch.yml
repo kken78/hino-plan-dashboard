@@ -1,0 +1,109 @@
+name: watch
+# 毎月1日の朝(JST)、町のページ(data/watch.json)を巡回し、新しい資料(PDF)・無くなった資料・ページの更新を Issue にする。
+# 見つけるだけで、データは変えない(転記は人と Claude Code の作業)。巡回そのものに失敗したときは、ワークフローを失敗させて
+# 「巡回に失敗した」Issue を作る。同じ内容の Issue が開いていれば作らない。
+# 必要な設定: Settings → Actions → General → Workflow permissions を「Read and write permissions」にする。
+on:
+  schedule:
+    - cron: "0 0 1 * *"  # 毎月1日 9:00 JST
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 巡回(1秒に1件以内)
+        id: watch
+        run: |
+          set +e
+          python3 tools/watch.py --json "$RUNNER_TEMP/watch.json" > "$RUNNER_TEMP/watch.md" 2> "$RUNNER_TEMP/watch.err"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/watch.md" >> "$GITHUB_STEP_SUMMARY"
+          cat "$RUNNER_TEMP/watch.md"; cat "$RUNNER_TEMP/watch.err"
+
+      - name: 結果を保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: watch-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/watch.json
+            ${{ runner.temp }}/watch.md
+          if-no-files-found: ignore
+
+      - name: 見つけたものを種類ごとに Issue にする
+        if: steps.watch.outputs.code == '0'
+        run: |
+          python3 - "$RUNNER_TEMP/watch.json" "$RUNNER_TEMP" <<'PY'
+          import hashlib, json, os, sys
+          rep = json.load(open(sys.argv[1], encoding="utf-8"))
+          out = sys.argv[2]
+          f = rep["findings"]
+          kinds = [
+              ("new", "新しい資料", "見るページに、台帳 data/watch.tsv に無い PDF のリンクがある。",
+               ["1. リンク先を見る。実施計画の新しい版なら、事業費の転記のやり直しを 05b 段B の手順で行う。中間見直し(後期計画)の資料や中間目標の評価なら、画面にどう反映するかを決めてから転記する", "2. `data/watch.tsv` に行を足す(status は、使うなら「使用」、まだ決めていなければ「未使用」、使わないなら「対象外」)"]),
+              ("gone", "資料が取れない", "台帳で「使用」の PDF が、ページからリンクされなくなったか、404 などで取れない。",
+               ["1. ページを見て、同じ資料が別の URL にあれば `data/watch.tsv` の url を直す(画面の出典のリンクも直す)",
+                "2. 町のサイトから外れたなら、Webアーカイブの保存版を探し、`data/watch.tsv` の status を「使用(Webアーカイブ)」にして note に保存版の URL と日時を書く。画面の出典のリンクも保存版にする"]),
+              ("updated", "ページの更新", "見るページの「更新日」が、台帳 data/watch.tsv の updated と違う。資料が差し替えられたか、本文が変わった。",
+               ["1. ページを見て、何が変わったか(中間見直しの進み方、懇話会の回、住民意識調査の結果、実施計画の版)を確かめる", "2. 確かめたら `data/watch.tsv` の page の行の updated を新しい日付にする(直さないと毎月 Issue ができる)"]),
+          ]
+          for key, title, what, steps in kinds:
+              items = f.get(key) or []
+              if not items:
+                  continue
+              sig = hashlib.sha256("\n".join(sorted(x["url"] + (x.get("now") or "") for x in items)).encode()).hexdigest()[:8]
+              lines = [f"町のページの巡回({rep['date']})で見つけた。{what}", ""]
+              for x in items:
+                  if key == "new":
+                      lines.append(f"- {x['label'] or '(リンクの文字なし)'}: {x['url']}(ページ {x['page_label'] or x['page']})")
+                  elif key == "gone":
+                      lines.append(f"- {x['label']}: {x['reason']}。{x['url']}")
+                  else:
+                      lines.append(f"- {x['label']}: 更新日 {x['was'] or '(台帳に無い)'} → {x['now']}。{x['url']}")
+              lines += ["", "## 次にやること"] + steps + ["", f"この Issue は .github/workflows/watch.yml が自動で作った。内容の印: {sig}"]
+              with open(os.path.join(out, f"issue-{key}.md"), "w", encoding="utf-8") as w:
+                  w.write("\n".join(lines) + "\n")
+              with open(os.path.join(out, f"issue-{key}.title"), "w", encoding="utf-8") as w:
+                  w.write(f"{title} {len(items)}件({sig})")
+          PY
+          for key in new gone updated; do
+            T="$RUNNER_TEMP/issue-$key.title"; [ -f "$T" ] || continue
+            TITLE=$(cat "$T"); SIG=$(sed -E 's/.*\((.*)\)$/\1/' "$T")
+            if gh issue list --state open --search "\"$SIG\" in:title" --json number -q '.[0].number' | grep -q .; then
+              echo "同じ内容の Issue が開いている: $TITLE"; continue
+            fi
+            gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/issue-$key.md"
+          done
+
+      - name: 巡回に失敗したら Issue にして失敗で終わる
+        if: steps.watch.outputs.code != '0'
+        run: |
+          TITLE="巡回に失敗した(watch.yml)"
+          if gh issue list --state open --search "\"$TITLE\" in:title" --json number -q '.[0].number' | grep -q .; then
+            echo "失敗の Issue はすでに開いている"
+          else
+            {
+              echo "町のページの巡回(.github/workflows/watch.yml)が失敗した。終了コード ${{ steps.watch.outputs.code }}。"
+              echo
+              echo "実行: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              echo
+              echo '```'; cat "$RUNNER_TEMP/watch.err" 2>/dev/null | tail -20; echo '```'
+              echo
+              echo "町のサイトの作りが変わったか、一時的に取れない。手元で \`python3 tools/watch.py\` を実行して原因を見る。一時的なものなら、この Issue を閉じるだけでよい。"
+            } > "$RUNNER_TEMP/fail.md"
+            gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/fail.md"
+          fi
+          exit 1

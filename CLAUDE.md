@@ -6,3 +6,4 @@
 4. main に直接コミットしない。作業ブランチを切り、PR を作る。マージは依頼者がする。
 5. 数値は、原典（README の「出典」の PDF）で確かめられるものだけを書く。推定で埋めない。
 6. データを直すときは `data/*.json` を編集し、`python3 build.py` で `assets/data_bundle.js` を作り直して、両方を同じコミットに入れる（README の「ファイル構成」）。`assets/data_bundle.js` は直接編集しない。検算の手順は無い。
+7. 町のページの巡回は `tools/watch.py` と `.github/workflows/watch.yml`（README「町のページの巡回」）。巡回は見つけるだけで、データと画面は変えない。資料を足したり使う版を替えたりしたら、`data/watch.tsv` の行と status を直す。

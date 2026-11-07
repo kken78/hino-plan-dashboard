@@ -57,6 +57,10 @@ build.py          … data/*.json から assets/data_bundle.js を再生成す�
 - **装飾の排除**：グラデーション・ドロップシャドウなどの装飾を撤去し、罫線ベースの簡素な表現に統一。
 - **カラーパレット**：UIの基調（背景・テキスト・単一系列のチャート・リンク・ヘッダー）はデジタル庁デザインシステムの「Blue」パレット（背景 Standard `#F8F8FB`／Control `#F1F1F4`、テキスト Label `#626264`、チャート Blue `#3460FB`、セマンティック Success `#197A4B`／Error `#CE0000`）。政策の柱の分類色のみ、計画書の公式配色を採用しています。
 
+## 共通の部品
+
+`index.html` の見出し・分野のナビ・ページの一覧・フッターと、その CSS（`<!-- portal-shared:〈名前〉 start/end -->` で囲んだ部分）は、[hino-portal](https://github.com/kken78/hino-portal) の `shared/` の正本の写しです（DESIGN.md ADR-1）。正本と同じかは `python3 <hino-portal>/shared/check.py index.html` で確かめ、CI（`.github/workflows/check-shared.yml`）でも確かめます。
+
 ## ローカルでの確認
 
 `index.html` をブラウザで直接開くだけで動作します（データはJSに埋め込み済みのため簡易サーバ不要）。

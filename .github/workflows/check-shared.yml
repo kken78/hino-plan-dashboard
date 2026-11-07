@@ -1,0 +1,16 @@
+name: check-shared
+# 共通の部品（見出し・分野のナビ・ページの一覧・フッター）が hino-portal の shared/ の正本と同じかを確かめる（DESIGN.md ADR-1）。
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check-shared:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 共通の部品が hino-portal の正本と同じか
+        run: |
+          git clone --depth 1 https://github.com/kken78/hino-portal.git /tmp/hino-portal
+          python3 /tmp/hino-portal/shared/check.py index.html

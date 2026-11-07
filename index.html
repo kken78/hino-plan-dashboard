@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第6次日野町総合計画 指標と事業費（プロトタイプ）</title>
+<title>第6次日野町総合計画 指標と事業費｜日野町データポータル（非公式）</title>
 <meta property="og:title" content="第6次日野町総合計画 指標と事業費">
 <meta property="og:description" content="KPI・実施計画・住民意識調査を34分野で横断するダッシュボード（プロトタイプ）">
 <meta property="og:type" content="website">
@@ -41,24 +41,6 @@ body{
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
 a{color:var(--link)}
 
-/* header（装飾的グラデーションは廃止し単色） */
-header.site{
-  background:var(--navy);
-  color:#fff; padding:24px 0 20px;
-}
-header.site .wrap{display:flex; flex-direction:column; gap:4px}
-.eyebrow{font-size:12px; letter-spacing:.16em; opacity:.9; font-weight:600}
-header.site h1{font-size:clamp(20px,3.4vw,30px); font-weight:800; letter-spacing:.01em}
-header.site .vision{font-size:13px; opacity:.92; margin-top:2px}
-.proto-tag{
-  display:inline-block; margin-top:8px; font-size:11px; background:rgba(255,255,255,.16);
-  padding:3px 10px; border-radius:4px; width:fit-content;
-}
-/* ポータルへの戻りリンク */
-.portal-back{background:var(--control); border-bottom:1px solid var(--line); font-size:12px; line-height:1.5}
-.portal-back .wrap{padding-top:6px; padding-bottom:6px}
-.portal-back a{text-decoration:none}
-.portal-back a:hover{text-decoration:underline}
 
 /* tabs */
 nav.tabs{position:sticky; top:0; z-index:30; background:#fff; border-bottom:1px solid var(--line)}
@@ -146,11 +128,6 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
 /* データ定義・出典（メタ情報） */
 .meta-note{background:var(--control); border:1px solid var(--line); border-radius:8px; padding:12px 15px; font-size:11.5px; color:var(--sub); line-height:1.7; margin-bottom:20px}
 .meta-note b{color:var(--ink)}
-.datalinks{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
-.datalinks a{font-size:11px; font-weight:700; text-decoration:none; border:1px solid var(--blue200); background:var(--blue50); color:var(--link); padding:4px 10px; border-radius:4px}
-.datalinks a:focus-visible{outline:2px solid var(--blue900); outline-offset:2px}
-.foot{margin-top:30px; padding-top:18px; border-top:1px solid var(--line); font-size:11.5px; color:var(--sub); line-height:1.7}
-.foot b{color:var(--ink)}
 .filterbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center}
 .filterbar .fl{font-size:12px; font-weight:700; color:var(--sub)}
 .chip{appearance:none; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:4px; padding:6px 13px; font-size:12.5px; font-weight:700; color:var(--sub)}
@@ -167,15 +144,65 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
   .bar>span,.panel{transition:none;animation:none}
 }
 </style>
+<!-- portal-shared:css start --><style>
+/* 日野町データポータル 共通の部品（見出し・ナビ・ページの見出し・フッター）。
+   正本は hino-portal/shared/shell.css。各ページはこれを <style> に写し、CI で同じであることを確かめる（DESIGN.md 9.1）。
+   文字の大きさは 14px 以上（DESIGN.md 5.2）。色は 3章の藍と朱。書体は端末のもの（5.1）。 */
+:root{--portal-ai:#1E4E9C;--portal-ai-ink:#0C2547;--portal-shu:#C33D2E;--portal-bg:#EFF3F9;--portal-card:#FFFFFF;--portal-ink:#1A2333;--portal-muted:#5B6B85;--portal-line:#DCE4F0;--portal-foot-bg:#0C2547;--portal-foot-ink:#C9D6EA;--portal-fs:16px;--portal-fs-sub:14px;--portal-fs-h1:18px;--portal-fs-h2:24px;--portal-sp1:8px;--portal-sp2:16px;--portal-sp3:24px;--portal-sp4:40px;--portal-font:"Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic Medium","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",Meiryo,system-ui,sans-serif}
+.portal-wrap{max-width:1080px;margin:0 auto;padding:0 var(--portal-sp2);box-sizing:border-box}
+.portal-head,.portal-page,.portal-foot{font-family:var(--portal-font);font-size:var(--portal-fs);line-height:1.7;letter-spacing:.02em}
+.portal-head *,.portal-page *,.portal-foot *{box-sizing:border-box}
+.portal-head a:focus-visible,.portal-page a:focus-visible,.portal-foot a:focus-visible{outline:2px solid #000;box-shadow:0 0 0 4px #FFD43D;outline-offset:1px}
+/* 共通の見出し（2.2 の 1、2.3） */
+.portal-head{background:var(--portal-card);border-bottom:1px solid var(--portal-line);color:var(--portal-ink)}
+.portal-head .portal-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:var(--portal-sp1) var(--portal-sp3);padding-top:var(--portal-sp1);padding-bottom:var(--portal-sp1)}
+.portal-brand{display:flex;align-items:center;gap:var(--portal-sp1);text-decoration:none;color:var(--portal-ink)}
+.portal-brand svg{width:26px;height:26px;flex:none}
+.portal-brand .portal-name{font-size:var(--portal-fs-h1);margin:0;font-weight:700;line-height:1.3}
+.portal-brand .portal-tag{font-size:var(--portal-fs-sub);color:var(--portal-muted);border:1px solid var(--portal-line);border-radius:3px;padding:0 6px;line-height:1.6}
+.portal-areas{display:flex;gap:var(--portal-sp2);margin-left:auto}
+.portal-areas a{font-size:var(--portal-fs-sub);text-decoration:none;color:var(--portal-ai);padding:4px 0;border-bottom:2px solid transparent;white-space:nowrap}
+.portal-areas a:hover{text-decoration:underline}
+.portal-areas a[aria-current]{color:var(--portal-ink);border-bottom-color:var(--portal-shu);font-weight:700}
+@media (max-width:767px){.portal-areas{margin-left:0;width:100%;overflow-x:auto}}
+/* ページの見出し（2.2 の 2・3） */
+.portal-page{padding:var(--portal-sp3) 0 var(--portal-sp2);color:var(--portal-ink)}
+.portal-page .portal-area{font-size:var(--portal-fs-sub);color:var(--portal-muted);margin:0 0 4px}
+.portal-page .portal-title{font-size:var(--portal-fs-h2);margin:0 0 4px;line-height:1.35;font-weight:700}
+.portal-page .portal-lead{margin:0 0 4px}
+.portal-page .portal-asof{font-size:var(--portal-fs-sub);color:var(--portal-muted);margin:0}
+.portal-siblings{font-size:var(--portal-fs-sub);margin:var(--portal-sp2) 0 0;display:flex;flex-wrap:wrap;gap:4px 0}
+.portal-siblings span,.portal-siblings a{padding-right:var(--portal-sp2)}
+.portal-siblings a{color:var(--portal-ai)}
+.portal-siblings span[aria-current]{font-weight:700;color:var(--portal-ink)}
+.portal-siblings .portal-lbl{color:var(--portal-muted)}
+/* フッター（2.5） */
+.portal-foot{margin-top:var(--portal-sp4);background:var(--portal-foot-bg);color:var(--portal-foot-ink);padding:var(--portal-sp3) 0 var(--portal-sp4);font-size:var(--portal-fs-sub)}
+.portal-foot a{color:#fff}
+.portal-foot dl{margin:0;display:grid;grid-template-columns:10em 1fr;gap:var(--portal-sp1) var(--portal-sp2)}
+.portal-foot dt{color:#fff;font-weight:700;margin:0}
+.portal-foot dd{margin:0}
+.portal-foot p{margin:0 0 4px}
+.portal-foot ul{margin:0;padding-left:1.2em}
+@media (max-width:767px){.portal-foot dl{grid-template-columns:1fr;gap:4px}.portal-foot dt{margin-top:var(--portal-sp1)}}
+</style><!-- portal-shared:css end -->
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <span class="eyebrow">滋賀県日野町 / 第6次総合計画（令和3〜12年度）</span>
-  <h1>総合計画 指標と事業費</h1>
-  <div class="vision">将来像「時代の変化に対応し だれもが輝き ともに創るまち“日野”」</div>
-  <span class="proto-tag">プロトタイプ ／ 公開PDFから独自抽出・非公式</span>
+<!-- portal-shared:header start -->
+<header class="portal-head"><div class="portal-wrap">
+<a class="portal-brand" href="https://kken78.github.io/hino-portal/"><svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="14" width="24" height="4" rx="2" fill="#1E4E9C"/><rect x="4" y="8" width="18" height="4" rx="2" fill="#3B6FBF"/><rect x="8" y="2" width="10" height="4" rx="2" fill="#C33D2E"/></svg><span class="portal-name">日野町データポータル</span><span class="portal-tag">非公式</span></a>
+<nav class="portal-areas" aria-label="分野"><a href="https://kken78.github.io/hino-portal/">トップ</a><a href="https://kken78.github.io/hino-portal/#g-plan" aria-current="page">計画と予算</a><a href="https://kken78.github.io/hino-portal/#g-stat">統計とくらし</a><a href="https://kken78.github.io/hino-portal/#g-council">議会</a></nav>
 </div></header>
-<div class="portal-back"><div class="wrap"><a href="https://kken78.github.io/hino-portal/">← 日野町データポータル</a></div></div>
+<!-- portal-shared:header end -->
+<div class="portal-page"><div class="portal-wrap">
+<p class="portal-area">計画と予算</p>
+<h1 class="portal-title">第6次日野町総合計画 指標と事業費</h1>
+<p class="portal-lead">将来像「時代の変化に対応し だれもが輝き ともに創るまち“日野”」を掲げる第6次日野町総合計画（令和3〜12年度）の成果指標・実施計画の事業費・住民意識調査を、34分野で並べたページです。</p>
+<p class="portal-asof">資料の時点：基本計画（令和3〜12年度）、実施計画（令和7〜9年度）、住民意識調査（令和6年8〜9月実施）</p>
+<!-- portal-shared:siblings start -->
+<nav class="portal-siblings" aria-label="計画と予算のページ"><span class="portal-lbl">このほかのページ</span><a href="https://kken78.github.io/shiga-hino-plans/">計画ライブラリ</a><span aria-current="page">総合計画 指標と事業費</span><a href="https://kken78.github.io/hino-budget/">当初予算 主な事業</a></nav>
+<!-- portal-shared:siblings end -->
+</div></div>
 
 <nav class="tabs"><div class="wrap" role="tablist">
   <button class="tab" role="tab" aria-selected="true" data-tab="overview">概要</button>
@@ -190,20 +217,24 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
   <section class="panel" data-tab="plan" id="p-plan"></section>
   <section class="panel" data-tab="survey" id="p-survey"></section>
 
-  <div class="foot">
-    <b>このダッシュボードについて</b><br>
-    このページは、滋賀県日野町 政策参与の東健二郎が、個人として作成した試作です。日野町の公式のサイトではなく、町の見解を示すものでもありません。<br>
-    第6次日野町総合計画の「基本計画（成果指標）」「実施計画（R7-R9）」「住民意識調査（R6実施）」を、公開PDFから独自に抽出し、34分野で横断できるよう試作したプロトタイプ（提示型ダッシュボード）です。デジタル庁「ダッシュボードデザインの実践ガイドブック」の設計原則（全体→部分の構造、比較対象の併記、誤解を生まない表現、色のみに依存しない識別、メタ情報の明記）と、同デザインシステムのカラーパレット（Blue）に準拠しています。<br>
-    <b>データの定義・時点：</b>成果指標は基準値→中間目標(R7)→最終目標(R12)の3点。基準値の年次は分野によりR1/R2見込み/H27等と異なります（各指標に併記）。実施計画は概算事業費の3年計（令和7〜9年度）。住民意識調査は令和6年実施・有効回答1,206件。<br>
-    <b>更新日：</b>2026-11（プロトタイプ）。<b>注意：</b>数値はPDFからの読み取りのため誤差を含む可能性があります。正確な値は必ず日野町公式の元資料をご確認ください。本サイトは非公式の実証実験であり、予告なく変更する場合があります。<br>
-    出典：日野町公式サイト「総合計画」（基本計画・実施計画・住民意識調査結果）。<br>
-    <span style="display:inline-block;margin-top:6px">元データ（JSON）：</span>
-    <span class="datalinks" style="display:inline-flex">
-      <a href="data/kpi.json">kpi.json</a><a href="data/plan.json">plan.json</a><a href="data/survey.json">survey.json</a>
-    </span>
-    <br>ほかのダッシュボード：<a href="https://kken78.github.io/hino-portal/">日野町データポータル（非公式）</a>
-  </div>
 </div></main>
+<!-- portal-shared:footer start -->
+<footer class="portal-foot"><div class="portal-wrap">
+<dl>
+<dt>このページについて</dt><dd><p>このページは、滋賀県日野町 政策参与の東健二郎が、個人として作成した試作です。日野町の公式のサイトではなく、町の見解を示すものでもありません。</p><p>第6次日野町総合計画の基本計画（成果指標）・実施計画（令和7〜9年度）・住民意識調査（令和6年実施）の公開 PDF から数値を転記し、34分野で横断して見られるようにしました。配色と表現は、デジタル庁「ダッシュボードデザインの実践ガイドブック」と、同じくデジタル庁のデザインシステムの「Blue」パレットによります。</p></dd>
+<dt>出典</dt><dd><ul>
+<li>第6次日野町総合計画 第3部 基本計画（<a href="https://www.town.shiga-hino.lg.jp/cmsfiles/contents/0000001/1791/03.pdf">分野①～⑧</a> PDF 9.57MB、<a href="https://www.town.shiga-hino.lg.jp/cmsfiles/contents/0000001/1791/04.pdf">分野⑨～㉑</a> PDF 10.41MB、<a href="https://www.town.shiga-hino.lg.jp/cmsfiles/contents/0000001/1791/05.pdf">分野㉒～㉞</a> PDF 10.29MB）。掲載ページは<a href="https://www.town.shiga-hino.lg.jp/0000001791.html">第6次日野町総合計画</a></li>
+<li><a href="https://www.town.shiga-hino.lg.jp/cmsfiles/contents/0000005/5740/R7-R9jissikeikaku.pdf">第6次日野町総合計画実施計画（令和7年度から令和9年度）</a>（PDF 603.67KB）。掲載ページは<a href="https://www.town.shiga-hino.lg.jp/0000005740.html">第6次日野町総合計画実施計画</a></li>
+<li><a href="https://www.town.shiga-hino.lg.jp/cmsfiles/contents/0000008/8274/juuminnisikityousa_gaiyou.pdf">第6次日野町総合計画にかかる住民意識調査結果（概要）</a>（PDF 810.89KB）。掲載ページは<a href="https://www.town.shiga-hino.lg.jp/0000008274.html">第6次日野町総合計画にかかる住民意識調査結果を報告します</a></li>
+</ul></dd>
+<dt>資料の時点</dt><dd><p>成果指標は、基準値・中間目標（令和7年度）・最終目標（令和12年度）の3点です。基準値の年次は分野により令和元年・令和2年見込み・平成27年などと異なります（各指標に併記）。実施計画は、概算事業費の3年計（令和7〜9年度）です。住民意識調査は令和6年実施で、有効回答は1,206件です。</p><p>ページの更新：2026年11月</p></dd>
+<dt>注意</dt><dd><p>内容の正確性を保証するものではありません。最新・正確な情報は日野町の公式ページでご確認ください。</p><p>数値は PDF から読み取ったもので、誤差を含むことがあります。正確な値は日野町の元の資料でご確認ください。このページは予告なく変更することがあります。</p><p><a href="https://www.town.shiga-hino.lg.jp/0000001791.html">日野町ホームページ 第6次日野町総合計画</a></p></dd>
+<dt>データ</dt><dd>元のデータ（JSON）：<a href="data/kpi.json">kpi.json</a>（成果指標）、<a href="data/plan.json">plan.json</a>（実施計画）、<a href="data/survey.json">survey.json</a>（住民意識調査）</dd>
+<dt>ソースコード</dt><dd><a href="https://github.com/kken78/hino-plan-dashboard">kken78/hino-plan-dashboard</a>（GitHub）</dd>
+<dt>ライセンス</dt><dd>CC0 1.0 Universal（リポジトリの LICENSE）</dd>
+</dl>
+</div></footer>
+<!-- portal-shared:footer end -->
 
 <script src="assets/data_bundle.js"></script>
 <script src="assets/app.js"></script>

@@ -32,7 +32,21 @@
     const midPct = Math.max(0,Math.min(100, Math.abs((mid-b)/span)*100));
     return {midPct};
   }
-  /* 改善の向き（data/kpi.json の direction）は、原典で確かめられるまで画面に出さない（hino-portal DESIGN.md 3.3、DESIGN.md ADR-2）。 */
+  /* 改善の向きは、基準値と最終目標(R12)の値から計算する（hino-portal DESIGN.md 6.1、DESIGN.md ADR-4）。
+     最終目標 > 基準値 なら増加で改善、< なら減少で改善、= なら維持。値は転記した原典の値のまま比べる（丸めない）。
+     計算した向きが data/kpi.json の direction と合わない指標は、向きを出さずに注記する（direction の neutral はどれとも合わない）。 */
+  const DIR_LABEL = {up:'増加で改善', down:'減少で改善', keep:'維持'};
+  const DIR_PENDING = '向きは原典で確かめ中';
+  function calcDir(ind){
+    const b=ind.baseline, fin=ind.target_final;
+    if(b==null||fin==null) return null;
+    return fin>b ? 'up' : fin<b ? 'down' : 'keep';
+  }
+  function dirText(ind){
+    const d=calcDir(ind);
+    if(d==null) return null;
+    return d===ind.direction ? DIR_LABEL[d] : DIR_PENDING;
+  }
 
   /* ---------- 概要タブ ---------- */
   function renderOverview(){
@@ -76,6 +90,7 @@
   let kpiFilter=0; // 0=全部
   function renderKpi(){
     const el=document.getElementById('p-kpi');
+    const pendingCount=KPI.fields.reduce((a,f)=>a+f.indicators.filter(i=>dirText(i)===DIR_PENDING).length,0);
     const fields = KPI.fields.filter(f=> kpiFilter===0 || f.pillar===kpiFilter);
     const chips = `<div class="filterbar"><span class="fl">政策の柱で絞り込み：</span>
       <button class="chip" data-pf="0" aria-pressed="${kpiFilter===0}">すべて</button>
@@ -90,7 +105,9 @@
         inner=f.indicators.map(ind=>{
           const tp=targetProgress(ind);
           const w = tp? tp.midPct : 0;
-          const aria=`${ind.name}。基準${fmt(ind.baseline)}${ind.unit}（${ind.baseline_year}）、中間目標${fmt(ind.target_mid)}${ind.unit}、最終目標${fmt(ind.target_final)}${ind.unit}`;
+          const dt=dirText(ind);
+          const aria=`${ind.name}。基準${fmt(ind.baseline)}${ind.unit}（${ind.baseline_year}）、中間目標${fmt(ind.target_mid)}${ind.unit}、最終目標${fmt(ind.target_final)}${ind.unit}`
+            + (dt==null ? '' : dt===DIR_PENDING ? `。${dt}` : `。改善の向き ${dt}（基準値と目標値から計算）`);
           return `<div class="ind">
             <div class="iname">${ind.name}</div>
             <div class="bar" role="img" aria-label="${aria}"><span style="width:${w.toFixed(0)}%"></span></div>
@@ -99,6 +116,7 @@
               <span>基準 <b>${fmt(ind.baseline)}${ind.unit}</b> <span class="yr">(${ind.baseline_year})</span></span>
               <span>中間(R7) <b>${fmt(ind.target_mid)}${ind.unit}</b> → 最終(R12) <b>${fmt(ind.target_final)}${ind.unit}</b></span>
             </div>
+            ${dt==null ? '' : `<div class="idir${dt===DIR_PENDING?' pending':''}">${dt}</div>`}
           </div>`;
         }).join('');
       }
@@ -114,6 +132,7 @@
     el.innerHTML=`
       <h2 class="sec">成果指標 — 分野別の基準値と目標値（基本計画）</h2>
       <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このページは各指標の実績値を収録していません。基準値の年次は分野により異なります（各指標に併記）。</p>
+      <p class="lead">各指標の下の「増加で改善」「減少で改善」「維持」は、改善の向きです。向きは基準値と目標値から計算しています。最終目標(R12)の値が基準値より大きければ増加で改善、小さければ減少で改善、同じなら維持です。計算した向きが、このページのデータに記録している向き（data/kpi.json の direction）と合わない${pendingCount}指標は、向きを出さず「${DIR_PENDING}」としています。</p>
       ${chips}
       <div class="grid">${cards}</div>`;
     el.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{kpiFilter=+b.dataset.pf; renderKpi(); animateBars(el);});

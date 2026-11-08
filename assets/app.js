@@ -11,10 +11,10 @@
     if(t>=100000){ // 1億円以上（=100,000千円）
       const oku=t/100000;
       const s=(oku>=100?oku.toFixed(0):oku.toFixed(1)).replace(/\.0$/,'');
-      return '<span class="num">'+s+'<small>億円</small></span>';
+      return '<span class="num">'+s+'<span class="u">億円</span></span>';
     }
-    if(t>=10) return '<span class="num">'+Math.round(t/10).toLocaleString('ja-JP')+'<small>万円</small></span>'; // 1万円以上（=10千円）
-    return '<span class="num">'+fmt(t)+'<small>千円</small></span>';
+    if(t>=10) return '<span class="num">'+Math.round(t/10).toLocaleString('ja-JP')+'<span class="u">万円</span></span>'; // 1万円以上（=10千円）
+    return '<span class="num">'+fmt(t)+'<span class="u">千円</span></span>';
   };
   const plainYen = t => yen(t).replace(/<[^>]+>/g,''); // aria-label用（HTMLタグ除去）
   const pillarTotals = ()=>{const m={};KPI.pillars.forEach(p=>m[p.id]=0);
@@ -46,11 +46,11 @@
       <h2 class="sec">収録している資料の時点</h2>
       <p class="lead">成果指標は基準値と目標値（中間目標＝令和7年度、最終目標＝令和12年度）で、実績値は含みません。実施計画は令和7〜9年度、住民意識調査は令和6年8〜9月実施です。一部の指標は目標の年次が異なります（中間・最終が令和5・9年度、令和6・10年度のもの）。<br>第6次総合計画は令和3〜12年度の10年計画です。3つの資料を34分野で並べています。</p>
       <div class="stats">
-        <div class="stat"><div class="k">計画期間</div><div class="v">10<small>年</small></div><div class="note">R3〜R12・中間目標はR7</div></div>
-        <div class="stat"><div class="k">成果指標(KPI)</div><div class="v">${kpiCount}<small>指標</small></div><div class="note">${kpiFields}/34分野で設定</div></div>
+        <div class="stat"><div class="k">計画期間</div><div class="v">10<span class="u">年</span></div><div class="note">R3〜R12・中間目標はR7</div></div>
+        <div class="stat"><div class="k">成果指標(KPI)</div><div class="v">${kpiCount}<span class="u">指標</span></div><div class="note">${kpiFields}/34分野で設定</div></div>
         <div class="stat"><div class="k">実施計画 事業費（R7-R9・3年計）</div><div class="v">${yen(budget)}</div><div class="note">概算事業費の合計</div></div>
-        <div class="stat"><div class="k">住民意識調査 回収率（R6）</div><div class="v">${SURVEY.meta.survey.response_rate}<small>%</small></div><div class="note">有効回答 ${fmt(SURVEY.meta.survey.responses)}件</div></div>
-        <div class="stat"><div class="k">幸福度 平均（R6・10点満点）</div><div class="v">${SURVEY.happiness.average}<small>/10点</small></div><div class="note">6点以上が6割超</div></div>
+        <div class="stat"><div class="k">住民意識調査 回収率（R6）</div><div class="v">${SURVEY.meta.survey.response_rate}<span class="u">%</span></div><div class="note">有効回答 ${fmt(SURVEY.meta.survey.responses)}件</div></div>
+        <div class="stat"><div class="k">幸福度 平均（R6・10点満点）</div><div class="v">${SURVEY.happiness.average}<span class="u">/10点</span></div><div class="note">6点以上が6割超</div></div>
       </div>
 
       <h2 class="sec">政策の柱別 事業費（実施計画 R7-R9・3年計）</h2>
@@ -96,7 +96,7 @@
             <div class="bar" role="img" aria-label="${aria}"><span style="width:${w.toFixed(0)}%"></span></div>
             <div class="barends"><span>基準</span><span>最終目標(R12)</span></div>
             <div class="barmeta">
-              <span>基準 <b>${fmt(ind.baseline)}${ind.unit}</b> <small>(${ind.baseline_year})</small></span>
+              <span>基準 <b>${fmt(ind.baseline)}${ind.unit}</b> <span class="yr">(${ind.baseline_year})</span></span>
               <span>中間(R7) <b>${fmt(ind.target_mid)}${ind.unit}</b> → 最終(R12) <b>${fmt(ind.target_final)}${ind.unit}</b></span>
             </div>
           </div>`;
@@ -129,7 +129,7 @@
     const rows=fields.map(f=>{
       const pid=KPI.fields.find(k=>k.id===f.id).pillar;
       return `<div class="budrow">
-        <div class="bn">${f.id}. ${f.name}<small>${PC[pid].name}</small></div>
+        <div class="bn">${f.id}. ${f.name}<span class="bs">${PC[pid].name}</span></div>
         <div class="bb"><span style="width:${(f.total/max*100).toFixed(1)}%" role="img" aria-label="${f.name} 概算事業費 ${plainYen(f.total)}"></span></div>
         <div class="bv">${yen(f.total)}</div>
       </div>`;
@@ -142,7 +142,7 @@
     const maxe=top[0].cost;
     const evrows=top.map(e=>{
       return `<div class="budrow">
-        <div class="bn">${e.name}<small>分野${e.id} ${e.field}</small></div>
+        <div class="bn">${e.name}<span class="bs">分野${e.id} ${e.field}</span></div>
         <div class="bb"><span style="width:${(e.cost/maxe*100).toFixed(1)}%" role="img" aria-label="${e.name} 事業費 ${plainYen(e.cost)}"></span></div>
         <div class="bv">${yen(e.cost)}</div>
       </div>`;

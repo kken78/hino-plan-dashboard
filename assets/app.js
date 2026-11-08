@@ -1,16 +1,20 @@
 /* ===== 第6次日野町総合計画 指標と事業費 ===== */
 (function(){
   const PC = {}; KPI.pillars.forEach(p=>PC[p.id]=p);
+  /* 政策の柱の色は共通の部品の CSS のトークン（hino-portal DESIGN.md 3.6）。面は --portal-pillarN、文字は --portal-pillarN-ink */
+  const pillarFill = id => `var(--portal-pillar${id})`;
+  /* 区別の色（hino-portal DESIGN.md 3.4）。1つのグラフで5色まで、順に当てる */
+  const CAT = [1,2,3,4,5].map(i=>`var(--portal-cat${i})`);
   const fmt = n => n==null ? '—' : n.toLocaleString('ja-JP');
   const yen = t => { // 千円単位の値を 億円／万円 で読みやすく
     if(t==null) return '—';
     if(t>=100000){ // 1億円以上（=100,000千円）
       const oku=t/100000;
       const s=(oku>=100?oku.toFixed(0):oku.toFixed(1)).replace(/\.0$/,'');
-      return s+'<small>億円</small>';
+      return '<span class="num">'+s+'<small>億円</small></span>';
     }
-    if(t>=10) return Math.round(t/10).toLocaleString('ja-JP')+'<small>万円</small>'; // 1万円以上（=10千円）
-    return fmt(t)+'<small>千円</small>';
+    if(t>=10) return '<span class="num">'+Math.round(t/10).toLocaleString('ja-JP')+'<small>万円</small></span>'; // 1万円以上（=10千円）
+    return '<span class="num">'+fmt(t)+'<small>千円</small></span>';
   };
   const plainYen = t => yen(t).replace(/<[^>]+>/g,''); // aria-label用（HTMLタグ除去）
   const pillarTotals = ()=>{const m={};KPI.pillars.forEach(p=>m[p.id]=0);
@@ -30,9 +34,7 @@
   }
   function dirLabel(d){return d==='up'?'増加で改善':d==='down'?'減少で改善':'維持・中立';}
   function dirArrow(d){return d==='up'?'▲':d==='down'?'▼':'＝';}
-  /* 方向は「改善の向き」を示す情報であり、良し悪しの状態ではない。
-     状態色（緑＝良/赤＝悪）を当てると誤解を生むため、矢印＋文言＋中立色で表現する。
-     セマンティック色（success/error）は、実績値が入り達成/未達が判定できる段階で導入する。 */
+  /* 改善の向きは矢印と文言で示し、色を付けない（hino-portal DESIGN.md 3.3）。 */
 
   /* ---------- 概要タブ ---------- */
   function renderOverview(){
@@ -44,7 +46,7 @@
     const maxPt=Math.max(...Object.values(pt));
     el.innerHTML = `
       <h2 class="sec">収録している資料の時点</h2>
-      <p class="lead">成果指標は基準値と目標値（中間目標＝令和7年度、最終目標＝令和12年度）で、実績値は含みません。実施計画は令和7〜9年度、住民意識調査は令和6年8〜9月実施です。一部の指標は目標の年次が異なります（中間・最終が令和5・9年度、令和6・10年度のもの）。<br>第6次総合計画は令和3〜12年度の10年計画。3つの情報源を34分野で横断します。まず全体像を示し、各タブで詳細に辿れる構成です。</p>
+      <p class="lead">成果指標は基準値と目標値（中間目標＝令和7年度、最終目標＝令和12年度）で、実績値は含みません。実施計画は令和7〜9年度、住民意識調査は令和6年8〜9月実施です。一部の指標は目標の年次が異なります（中間・最終が令和5・9年度、令和6・10年度のもの）。<br>第6次総合計画は令和3〜12年度の10年計画です。3つの資料を34分野で並べています。</p>
       <div class="stats">
         <div class="stat highlight"><div class="k">計画期間</div><div class="v">10<small>年</small></div><div class="note">R3〜R12・中間目標はR7</div></div>
         <div class="stat"><div class="k">成果指標(KPI)</div><div class="v">${kpiCount}<small>指標</small></div><div class="note">${kpiFields}/34分野で設定</div></div>
@@ -56,13 +58,13 @@
       <h2 class="sec">政策の柱別 事業費（実施計画 R7-R9・3年計）</h2>
       <p class="lead">5つの政策の柱ごとに、実施計画の概算事業費（3年計）を比較しています。色は政策の柱（凡例と対応）。</p>
       <div class="pillars">
-        ${KPI.pillars.map(p=>`<span class="pill"><span class="dot" style="background:${p.color}"></span>${p.id}. ${p.name}</span>`).join('')}
+        ${KPI.pillars.map(p=>`<span class="pill"><span class="dot" style="background:${pillarFill(p.id)}"></span>${p.id}. ${p.name}</span>`).join('')}
       </div>
       <div class="card2">
         ${KPI.pillars.map(p=>`
           <div class="budrow">
             <div class="bn">${p.id}. ${p.name}</div>
-            <div class="bb"><span style="width:${(pt[p.id]/maxPt*100).toFixed(1)}%;background:${p.color}" role="img" aria-label="${p.name} 事業費 ${plainYen(pt[p.id])}"></span></div>
+            <div class="bb"><span style="width:${(pt[p.id]/maxPt*100).toFixed(1)}%;background:${pillarFill(p.id)}" role="img" aria-label="${p.name} 事業費 ${plainYen(pt[p.id])}"></span></div>
             <div class="bv">${yen(pt[p.id])}</div>
           </div>`).join('')}
       </div>
@@ -79,10 +81,10 @@
     const fields = KPI.fields.filter(f=> kpiFilter===0 || f.pillar===kpiFilter);
     const chips = `<div class="filterbar"><span class="fl">政策の柱で絞り込み：</span>
       <button class="chip" data-pf="0" aria-pressed="${kpiFilter===0}">すべて</button>
-      ${KPI.pillars.map(p=>`<button class="chip" data-pf="${p.id}" aria-pressed="${kpiFilter===p.id}"><span class="cdot" style="background:${p.color}"></span>${p.id}. ${p.name}</button>`).join('')}
+      ${KPI.pillars.map(p=>`<button class="chip" data-pf="${p.id}" aria-pressed="${kpiFilter===p.id}"><span class="cdot" style="background:${pillarFill(p.id)}"></span>${p.id}. ${p.name}</button>`).join('')}
     </div>`;
     const cards = fields.map(f=>{
-      const c=PC[f.pillar].color;
+      const c=pillarFill(f.pillar);
       let inner;
       if(!f.indicators.length){
         inner=`<div class="no-kpi">この分野は数値目標（成果指標）が設定されていません。<br><span>主な取組のみ</span></div>`;
@@ -113,7 +115,7 @@
     }).join('');
     el.innerHTML=`
       <h2 class="sec">成果指標 — 分野別の基準値と目標値（基本計画）</h2>
-      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このダッシュボードは各指標の実績値を収録していません。改善の向きは指標ごとに異なるため、矢印と文言で示しています（▲増加で改善 ／ ▼減少で改善 ／ ＝維持・中立）。実績値が公表されれば、達成度（達成／未達）を色で重ねられます。基準値の年次は分野により異なります（各指標に併記）。</p>
+      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このページは各指標の実績値を収録していません。改善の向きは指標ごとに異なるため、矢印と文言で示しています（▲増加で改善 ／ ▼減少で改善 ／ ＝維持・中立）。基準値の年次は分野により異なります（各指標に併記）。</p>
       ${chips}
       <div class="grid">${cards}</div>`;
     el.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{kpiFilter=+b.dataset.pf; renderKpi(); animateBars(el);});
@@ -152,34 +154,34 @@
       <p class="lead">基本計画の施策を実現する具体的方策。3年計画で毎年度ローリング更新されます。総額 約 <b>${yen(total)}</b>（概算事業費の合計）。事業費の大きい順に並べています。</p>
       <div class="card2" style="margin-bottom:24px">${rows}</div>
       <h2 class="sec">主要事業 上位12（事業費・3年計／降順）</h2>
-      <p class="lead">医療・介護・福祉の特別会計繰出や広域組合負担金が上位を占めます。</p>
+      <p class="lead">実施計画の主要事業を、概算事業費（3年計）の大きい順に12事業並べています。</p>
       <div class="card2">${evrows}</div>`;
     animateBars(el);
   }
 
   /* ---------- 住民の声タブ ---------- */
+  // 割合は原典（data/survey.json）の小数1桁で示す（65.0 を 65 としない。hino-portal DESIGN.md 6.4）
+  const pct1 = v => v.toFixed(1);
   function donut(items, colors){
     const tot=items.reduce((a,i)=>a+i.value,0); let acc=0; const segs=[];
     items.forEach((it,i)=>{const frac=it.value/tot; const a0=acc*360; acc+=frac; const a1=acc*360;
       segs.push(`${colors[i%colors.length]} ${a0}deg ${a1}deg`);});
     return `<div class="donut-wrap">
       <div style="width:128px;height:128px;border-radius:50%;background:conic-gradient(${segs.join(',')});flex:0 0 auto"></div>
-      <div class="legend">${items.map((it,i)=>`<div><span class="ld" style="background:${colors[i%colors.length]}"></span>${it.label} <b style="margin-left:4px">${it.value}%</b></div>`).join('')}</div>
+      <div class="legend">${items.map((it,i)=>`<div><span class="ld" style="background:${colors[i%colors.length]}"></span>${it.label} <b style="margin-left:4px">${pct1(it.value)}%</b></div>`).join('')}</div>
     </div>`;
   }
   function hbars(items, opts={}){
     const max=opts.max || Math.max(...items.map(i=>i.value));
     const unit=opts.unit||'%';
-    return items.map(it=>`<div class="sbar ${it.weak?'weak':''}">
-      <div class="sl"><span>${it.label}</span><span class="pct">${fmt(it.value)}${unit}</span></div>
+    return items.map(it=>`<div class="sbar">
+      <div class="sl"><span>${it.label}</span><span class="pct">${unit==='%'?pct1(it.value):fmt(it.value)}${unit}</span></div>
       <div class="st"><span style="width:${(it.value/max*100).toFixed(1)}%"></span></div>
     </div>`).join('');
   }
   function renderSurvey(){
     const el=document.getElementById('p-survey');
-    // 順序のある選択肢は単一色相の濃淡（Blueランプ）＋無回答は灰。色のみに依存せず数値も併記。
-    const C5=['#0017C1','#3460FB','#7096F8','#C5D7FB','#CCCCCC'];
-    const C4=['#0017C1','#3460FB','#7096F8','#CCCCCC'];
+    // 構成比の項目は区別の色を順に当てる（hino-portal DESIGN.md 3.4）。凡例に名前と数値を併記する。
     el.innerHTML=`
       <h2 class="sec">住民の声 — 住民意識調査（令和6年実施）</h2>
       <p class="lead">対象：${SURVEY.meta.survey.target}／調査期間 ${SURVEY.meta.survey.period}／有効回答 ${fmt(SURVEY.meta.survey.responses)}件（回収率 ${SURVEY.meta.survey.response_rate}%）。</p>
@@ -193,8 +195,8 @@
       </div>
 
       <div class="two" style="margin-top:24px">
-        <div class="card2"><h3>協働のまちづくりへの関心</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.collaboration.interest,C5)}</div>
-        <div class="card2"><h3>協働ができていると思うか</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.collaboration.achieved,C5)}</div>
+        <div class="card2"><h3>協働のまちづくりへの関心</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.collaboration.interest,CAT)}</div>
+        <div class="card2"><h3>協働ができていると思うか</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.collaboration.achieved,CAT)}</div>
       </div>
 
       <div class="two" style="margin-top:24px">
@@ -208,8 +210,8 @@
         <div class="card2"><h3>居住地区</h3><div class="csrc">構成比（%）</div>${hbars(SURVEY.respondents.district)}</div>
       </div>
       <div class="two" style="margin-top:24px">
-        <div class="card2"><h3>世帯構成</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.respondents.household,C5)}</div>
-        <div class="card2"><h3>居住歴</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.respondents.residency,C4)}</div>
+        <div class="card2"><h3>世帯構成</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.respondents.household,CAT)}</div>
+        <div class="card2"><h3>居住歴</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.respondents.residency,CAT)}</div>
       </div>`;
   }
 

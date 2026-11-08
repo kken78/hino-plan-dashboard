@@ -42,7 +42,7 @@ nav.tabs{position:sticky; top:0; z-index:30; background:#fff; border-bottom:1px 
 nav.tabs .wrap{display:flex; gap:2px; overflow-x:auto}
 .tab{
   appearance:none; border:0; background:none; cursor:pointer; white-space:nowrap;
-  font-size:14px; font-weight:700; color:var(--sub); padding:15px 18px;
+  font-size:var(--portal-fs-sub); font-weight:700; color:var(--sub); padding:15px 18px;
   border-bottom:3px solid transparent; font-family:inherit;
 }
 .tab[aria-selected="true"]{color:var(--portal-ai-ink); border-bottom-color:var(--portal-shu)}
@@ -53,86 +53,87 @@ main{padding:26px 0 60px}
 .panel[data-active="true"]{display:block; animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-h2.sec{font-size:18px; font-weight:800; margin:6px 0 14px; display:flex; align-items:center; gap:9px}
+h2.sec{font-size:var(--portal-fs-h3); font-weight:800; margin:6px 0 14px; display:flex; align-items:center; gap:9px}
 h2.sec::before{content:""; width:5px; height:20px; background:var(--portal-ai); border-radius:2px}
-.lead{color:var(--sub); font-size:13.5px; margin-bottom:18px; max-width:760px}
+.lead{color:var(--sub); font-size:var(--portal-fs-sub); margin-bottom:18px; max-width:760px}
 
 /* stat cards */
 .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:13px; margin-bottom:26px}
 .stat{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 16px 15px}
-.stat .k{font-size:11.5px; color:var(--sub); font-weight:700; letter-spacing:.02em}
-.stat .v{font-size:27px; font-weight:800; margin-top:5px; line-height:1.1; white-space:nowrap}
-.stat .v small{font-size:13px; font-weight:700; color:var(--sub); margin-left:2px}
-.stat .note{font-size:11px; color:var(--sub); margin-top:4px}
+.stat .k{font-size:var(--portal-fs-sub); color:var(--sub); font-weight:700; letter-spacing:.02em}
+.stat .v{font-size:var(--portal-fs-h2); font-weight:800; margin-top:5px; line-height:1.1; white-space:nowrap}
+.stat .v .u{font-size:var(--portal-fs-sub); font-weight:700; color:var(--sub); margin-left:2px}
+.stat .note{font-size:var(--portal-fs-sub); color:var(--sub); margin-top:4px}
 
 /* 数字と単位を折り返さない（hino-portal DESIGN.md 6.4） */
 .num{white-space:nowrap}
 
 /* pillar legend */
 .pillars{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
-.pill{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; background:#fff; border:1px solid var(--line); padding:6px 12px 6px 10px; border-radius:4px}
+.pill{display:flex; align-items:center; gap:7px; font-size:var(--portal-fs-sub); font-weight:700; background:#fff; border:1px solid var(--line); padding:6px 12px 6px 10px; border-radius:4px}
 .dot{width:11px; height:11px; border-radius:2px}
 
 /* field cards grid */
-.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:15px}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr)); gap:15px}
 .fcard{background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; display:flex; flex-direction:column}
 .fcard .top{padding:13px 15px 11px; border-left:5px solid var(--line)}
-.fcard .fid{font-size:11px; font-weight:800; color:var(--sub)}
-.fcard .fname{font-size:15.5px; font-weight:800; margin-top:1px}
-.fcard .fpolicy{font-size:11px; color:var(--sub); margin-top:2px}
+.fcard .fid{font-size:var(--portal-fs-sub); font-weight:800; color:var(--sub)}
+.fcard .fname{font-size:var(--portal-fs-h1); font-weight:800; margin-top:1px}
+.fcard .fpolicy{font-size:var(--portal-fs-sub); color:var(--sub); margin-top:2px}
 .fcard .body{padding:4px 15px 14px; flex:1}
 
 /* indicator row */
 .ind{padding:11px 0; border-top:1px solid var(--line)}
 .ind:first-child{border-top:0}
-.ind .iname{font-size:12.5px; font-weight:600; line-height:1.45; margin-bottom:7px}
+.ind .iname{font-size:var(--portal-fs-sub); font-weight:600; line-height:1.45; margin-bottom:7px}
 .bar{position:relative; height:9px; background:var(--control); border-radius:4px; overflow:hidden; margin:6px 0 4px}
 .bar > span{position:absolute; left:0; top:0; bottom:0; border-radius:4px; background:var(--portal-ai); transition:width .8s cubic-bezier(.2,.7,.2,1)}
-.barends{display:flex; justify-content:space-between; font-size:10px; color:var(--sub); margin:-2px 0 4px}
-.barmeta{display:flex; justify-content:space-between; font-size:11px; color:var(--sub); font-variant-numeric:tabular-nums}
+.barends{display:flex; justify-content:space-between; font-size:var(--portal-fs-sub); color:var(--sub); margin:-2px 0 4px}
+.barmeta{display:flex; flex-wrap:wrap; justify-content:space-between; gap:0 12px; font-size:var(--portal-fs-sub); color:var(--sub); font-variant-numeric:tabular-nums}
 .barmeta b{color:var(--ink); white-space:nowrap}
-.prog-pill{font-size:10.5px; font-weight:800; padding:1px 7px; border-radius:20px}
-.no-kpi{font-size:12px; color:var(--sub); padding:14px 0; font-style:normal}
-.no-kpi span{display:inline-block; background:var(--control); padding:2px 9px; border-radius:4px; font-weight:700; font-size:11px}
+.no-kpi{font-size:var(--portal-fs-sub); color:var(--sub); padding:14px 0; font-style:normal}
+.no-kpi span{display:inline-block; background:var(--control); padding:2px 9px; border-radius:4px; font-weight:700; font-size:var(--portal-fs-sub)}
 
 /* budget bars */
 .budrow{display:flex; align-items:center; gap:12px; padding:9px 0; border-top:1px solid var(--line)}
 .budrow:first-child{border-top:0}
-.budrow .bn{flex:0 0 150px; font-size:12.5px; font-weight:700}
-.budrow .bn small{display:block; font-weight:600; color:var(--sub); font-size:10.5px}
+.budrow .bn{flex:0 0 220px; font-size:var(--portal-fs-sub); font-weight:700}
+.budrow .bn .bs{display:block; font-weight:600; color:var(--sub); font-size:var(--portal-fs-sub)}
 .budrow .bb{flex:1; height:18px; background:var(--control); border-radius:3px; overflow:hidden}
 .budrow .bb > span{display:block; height:100%; border-radius:3px; background:var(--portal-ai)}
-.budrow .bv{flex:0 0 96px; text-align:right; font-size:12.5px; font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+.budrow .bv{flex:0 0 96px; text-align:right; font-size:var(--portal-fs-sub); font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
 
 /* survey bars */
 .sbar{margin:9px 0}
-.sbar .sl{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:3px}
+.sbar .sl{display:flex; justify-content:space-between; gap:12px; font-size:var(--portal-fs-sub); margin-bottom:3px}
 .sbar .sl .pct{font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
 .sbar .st{height:14px; background:var(--control); border-radius:3px; overflow:hidden}
 .sbar .st > span{display:block; height:100%; border-radius:3px; background:var(--portal-ai)}
 .two{display:grid; grid-template-columns:1fr 1fr; gap:24px}
 .card2{background:#fff; border:1px solid var(--line); border-radius:8px; padding:17px 18px}
-.card2 h3{font-size:14.5px; font-weight:800; margin-bottom:4px}
-.card2 .csrc{font-size:10.5px; color:var(--sub); margin-bottom:11px}
+.card2 h3{font-size:var(--portal-fs-h1); font-weight:800; margin-bottom:4px}
+.card2 .csrc{font-size:var(--portal-fs-sub); color:var(--sub); margin-bottom:11px}
 .donut-wrap{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
-.legend{font-size:12px}
+.legend{font-size:var(--portal-fs-sub)}
 .legend div{display:flex; align-items:center; gap:7px; margin:3px 0}
 .legend .ld{width:11px;height:11px;border-radius:2px;flex:0 0 auto}
 .legend b{white-space:nowrap}
 /* データ定義・出典（メタ情報） */
-.meta-note{background:var(--control); border:1px solid var(--line); border-radius:8px; padding:12px 15px; font-size:11.5px; color:var(--sub); line-height:1.7; margin-bottom:20px}
+.meta-note{background:var(--control); border:1px solid var(--line); border-radius:8px; padding:12px 15px; font-size:var(--portal-fs-sub); color:var(--sub); line-height:1.7; margin-bottom:20px}
 .meta-note b{color:var(--ink)}
 .filterbar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center}
-.filterbar .fl{font-size:12px; font-weight:700; color:var(--sub)}
-.chip{appearance:none; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:4px; padding:6px 13px; font-size:12.5px; font-weight:700; color:var(--sub)}
+.filterbar .fl{font-size:var(--portal-fs-sub); font-weight:700; color:var(--sub)}
+.chip{appearance:none; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:4px; padding:6px 13px; font-size:var(--portal-fs-sub); font-weight:700; color:var(--sub)}
 .chip .cdot{width:9px; height:9px; border-radius:2px; flex:0 0 auto}
 .chip[aria-pressed="true"]{color:#fff; border-color:transparent; background:var(--portal-ai)}
 .chip[aria-pressed="true"] .cdot{box-shadow:0 0 0 1.5px #fff}
 .chip:focus-visible{outline:2px solid #000; box-shadow:0 0 0 4px #FFD43D; outline-offset:1px}
 @media(max-width:720px){
   .two{grid-template-columns:1fr}
-  .budrow .bn{flex-basis:110px}
-  .budrow .bv{flex-basis:76px}
+  /* 幅が足りないので、名前を棒の上の行へ置く（文字は小さくしない。shiga-hino-plans DESIGN.md ADR-8 の表） */
+  .budrow{flex-wrap:wrap; gap:4px 12px}
+  .budrow .bn{flex:0 0 100%}
+  .budrow .bv{flex-basis:auto}
 }
 @media(prefers-reduced-motion:reduce){
   .bar>span,.panel{transition:none;animation:none}
@@ -141,9 +142,9 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--portal-ai); 
 <!-- portal-shared:css start --><style>
 /* 日野町データポータル 共通の部品（見出し・ナビ・ページの見出し・フッター）。
    正本は hino-portal/shared/shell.css。各ページはこれを <style> に写し、CI で同じであることを確かめる（DESIGN.md 9.1）。
-   文字の大きさは 14px 以上（DESIGN.md 5.2）。色は 3章の藍と朱。書体は端末のもの（5.1）。
+   文字の大きさは --portal-fs-sub 14px・--portal-fs 16px・--portal-fs-h1 18px・--portal-fs-h3 20px・--portal-fs-h2 24px の5段階だけ（DESIGN.md 5.2）。色は 3章の藍と朱。書体は端末のもの（5.1）。
    --portal-cat1〜5 はグラフの区別の色（3.4）、--portal-pillar1〜5（面）と --portal-pillar1-ink〜5-ink（文字）は第6次総合計画の政策の柱の色（3.6）。 */
-:root{--portal-ai:#1E4E9C;--portal-ai-ink:#0C2547;--portal-shu:#C33D2E;--portal-bg:#EFF3F9;--portal-card:#FFFFFF;--portal-ink:#1A2333;--portal-muted:#5B6B85;--portal-line:#DCE4F0;--portal-foot-bg:#0C2547;--portal-foot-ink:#C9D6EA;--portal-cat1:#3460FB;--portal-cat2:#AC3E00;--portal-cat3:#197A4B;--portal-cat4:#008299;--portal-cat5:#767676;--portal-pillar1:#E72F5C;--portal-pillar2:#E36800;--portal-pillar3:#639B22;--portal-pillar4:#009AB4;--portal-pillar5:#3F51A2;--portal-pillar1-ink:#D91948;--portal-pillar2-ink:#B45300;--portal-pillar3-ink:#4F7B1B;--portal-pillar4-ink:#007A8F;--portal-pillar5-ink:#3F51A2;--portal-fs:16px;--portal-fs-sub:14px;--portal-fs-h1:18px;--portal-fs-h2:24px;--portal-sp1:8px;--portal-sp2:16px;--portal-sp3:24px;--portal-sp4:40px;--portal-font:"Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic Medium","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",Meiryo,system-ui,sans-serif}
+:root{--portal-ai:#1E4E9C;--portal-ai-ink:#0C2547;--portal-shu:#C33D2E;--portal-bg:#EFF3F9;--portal-card:#FFFFFF;--portal-ink:#1A2333;--portal-muted:#5B6B85;--portal-line:#DCE4F0;--portal-foot-bg:#0C2547;--portal-foot-ink:#C9D6EA;--portal-cat1:#3460FB;--portal-cat2:#AC3E00;--portal-cat3:#197A4B;--portal-cat4:#008299;--portal-cat5:#767676;--portal-pillar1:#E72F5C;--portal-pillar2:#E36800;--portal-pillar3:#639B22;--portal-pillar4:#009AB4;--portal-pillar5:#3F51A2;--portal-pillar1-ink:#D91948;--portal-pillar2-ink:#B45300;--portal-pillar3-ink:#4F7B1B;--portal-pillar4-ink:#007A8F;--portal-pillar5-ink:#3F51A2;--portal-fs:16px;--portal-fs-sub:14px;--portal-fs-h1:18px;--portal-fs-h2:24px;--portal-fs-h3:20px;--portal-sp1:8px;--portal-sp2:16px;--portal-sp3:24px;--portal-sp4:40px;--portal-font:"Hiragino Sans","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic Medium","Yu Gothic","Noto Sans CJK JP","Noto Sans JP",Meiryo,system-ui,sans-serif}
 .portal-wrap{max-width:1080px;margin:0 auto;padding:0 var(--portal-sp2);box-sizing:border-box}
 .portal-head,.portal-page,.portal-foot{font-family:var(--portal-font);font-size:var(--portal-fs);line-height:1.7;letter-spacing:.02em}
 .portal-head *,.portal-page *,.portal-foot *{box-sizing:border-box}

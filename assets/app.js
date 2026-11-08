@@ -32,9 +32,7 @@
     const midPct = Math.max(0,Math.min(100, Math.abs((mid-b)/span)*100));
     return {midPct};
   }
-  function dirLabel(d){return d==='up'?'増加で改善':d==='down'?'減少で改善':'維持・中立';}
-  function dirArrow(d){return d==='up'?'▲':d==='down'?'▼':'＝';}
-  /* 改善の向きは矢印と文言で示し、色を付けない（hino-portal DESIGN.md 3.3）。 */
+  /* 改善の向き（data/kpi.json の direction）は、原典で確かめられるまで画面に出さない（hino-portal DESIGN.md 3.3、DESIGN.md ADR-2）。 */
 
   /* ---------- 概要タブ ---------- */
   function renderOverview(){
@@ -48,7 +46,7 @@
       <h2 class="sec">収録している資料の時点</h2>
       <p class="lead">成果指標は基準値と目標値（中間目標＝令和7年度、最終目標＝令和12年度）で、実績値は含みません。実施計画は令和7〜9年度、住民意識調査は令和6年8〜9月実施です。一部の指標は目標の年次が異なります（中間・最終が令和5・9年度、令和6・10年度のもの）。<br>第6次総合計画は令和3〜12年度の10年計画です。3つの資料を34分野で並べています。</p>
       <div class="stats">
-        <div class="stat highlight"><div class="k">計画期間</div><div class="v">10<small>年</small></div><div class="note">R3〜R12・中間目標はR7</div></div>
+        <div class="stat"><div class="k">計画期間</div><div class="v">10<small>年</small></div><div class="note">R3〜R12・中間目標はR7</div></div>
         <div class="stat"><div class="k">成果指標(KPI)</div><div class="v">${kpiCount}<small>指標</small></div><div class="note">${kpiFields}/34分野で設定</div></div>
         <div class="stat"><div class="k">実施計画 事業費（R7-R9・3年計）</div><div class="v">${yen(budget)}</div><div class="note">概算事業費の合計</div></div>
         <div class="stat"><div class="k">住民意識調査 回収率（R6）</div><div class="v">${SURVEY.meta.survey.response_rate}<small>%</small></div><div class="note">有効回答 ${fmt(SURVEY.meta.survey.responses)}件</div></div>
@@ -92,9 +90,9 @@
         inner=f.indicators.map(ind=>{
           const tp=targetProgress(ind);
           const w = tp? tp.midPct : 0;
-          const aria=`${ind.name}。基準${fmt(ind.baseline)}${ind.unit}（${ind.baseline_year}）、中間目標${fmt(ind.target_mid)}${ind.unit}、最終目標${fmt(ind.target_final)}${ind.unit}、${dirLabel(ind.direction)}`;
+          const aria=`${ind.name}。基準${fmt(ind.baseline)}${ind.unit}（${ind.baseline_year}）、中間目標${fmt(ind.target_mid)}${ind.unit}、最終目標${fmt(ind.target_final)}${ind.unit}`;
           return `<div class="ind">
-            <div class="iname">${ind.name}<span class="dirtag" title="改善の向き"><span class="ar">${dirArrow(ind.direction)}</span>${dirLabel(ind.direction)}</span></div>
+            <div class="iname">${ind.name}</div>
             <div class="bar" role="img" aria-label="${aria}"><span style="width:${w.toFixed(0)}%"></span></div>
             <div class="barends"><span>基準</span><span>最終目標(R12)</span></div>
             <div class="barmeta">
@@ -115,7 +113,7 @@
     }).join('');
     el.innerHTML=`
       <h2 class="sec">成果指標 — 分野別の基準値と目標値（基本計画）</h2>
-      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このページは各指標の実績値を収録していません。改善の向きは指標ごとに異なるため、矢印と文言で示しています（▲増加で改善 ／ ▼減少で改善 ／ ＝維持・中立）。基準値の年次は分野により異なります（各指標に併記）。</p>
+      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このページは各指標の実績値を収録していません。基準値の年次は分野により異なります（各指標に併記）。</p>
       ${chips}
       <div class="grid">${cards}</div>`;
     el.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{kpiFilter=+b.dataset.pf; renderKpi(); animateBars(el);});
@@ -210,7 +208,7 @@
         <div class="card2"><h3>居住地区</h3><div class="csrc">構成比（%）</div>${hbars(SURVEY.respondents.district)}</div>
       </div>
       <div class="two" style="margin-top:24px">
-        <div class="card2"><h3>世帯構成</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.respondents.household,CAT)}</div>
+        <div class="card2"><h3>世帯構成</h3><div class="csrc">構成比（%）</div>${hbars(SURVEY.respondents.household)}</div>
         <div class="card2"><h3>居住歴</h3><div class="csrc">構成比（%）</div>${donut(SURVEY.respondents.residency,CAT)}</div>
       </div>`;
   }

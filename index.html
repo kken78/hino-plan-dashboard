@@ -24,9 +24,6 @@
   --bg:#F8F8FB;         /* 背景 Standard */
   --control:#F1F1F4;    /* 背景 Control：操作UI・バー下地 */
   --card:#FFFFFF;
-  /* チャート（Blue ランプ） */
-  --blue900:#0017C1; --blue600:#3460FB; --blue400:#7096F8; --blue200:#C5D7FB; --blue50:#D9E6FF;
-  --navy:#000060;       /* Blue 1200：ヘッダー等 */
   --maxw:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -48,8 +45,8 @@ nav.tabs .wrap{display:flex; gap:2px; overflow-x:auto}
   font-size:14px; font-weight:700; color:var(--sub); padding:15px 18px;
   border-bottom:3px solid transparent; font-family:inherit;
 }
-.tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--blue900)}
-.tab:focus-visible{outline:2px solid var(--blue900); outline-offset:-2px}
+.tab[aria-selected="true"]{color:var(--portal-ai-ink); border-bottom-color:var(--portal-shu)}
+.tab:focus-visible{outline:2px solid #000; box-shadow:inset 0 0 0 4px #FFD43D; outline-offset:-2px}
 
 main{padding:26px 0 60px}
 .panel{display:none}
@@ -57,13 +54,12 @@ main{padding:26px 0 60px}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
 h2.sec{font-size:18px; font-weight:800; margin:6px 0 14px; display:flex; align-items:center; gap:9px}
-h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); border-radius:2px}
+h2.sec::before{content:""; width:5px; height:20px; background:var(--portal-ai); border-radius:2px}
 .lead{color:var(--sub); font-size:13.5px; margin-bottom:18px; max-width:760px}
 
 /* stat cards */
 .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:13px; margin-bottom:26px}
 .stat{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 16px 15px}
-.stat.highlight{background:var(--blue50); border-color:var(--blue200)}
 .stat .k{font-size:11.5px; color:var(--sub); font-weight:700; letter-spacing:.02em}
 .stat .v{font-size:27px; font-weight:800; margin-top:5px; line-height:1.1; white-space:nowrap}
 .stat .v small{font-size:13px; font-weight:700; color:var(--sub); margin-left:2px}
@@ -90,9 +86,6 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
 .ind{padding:11px 0; border-top:1px solid var(--line)}
 .ind:first-child{border-top:0}
 .ind .iname{font-size:12.5px; font-weight:600; line-height:1.45; margin-bottom:7px}
-/* 方向タグ：状態色（緑/赤）ではなく中立色で表現し、矢印＋文言で識別（色のみに依存しない） */
-.dirtag{font-size:10.5px; font-weight:700; padding:1px 7px; border-radius:4px; margin-left:6px; vertical-align:middle; background:var(--control); color:var(--sub)}
-.dirtag .ar{font-weight:800; margin-right:3px}
 .bar{position:relative; height:9px; background:var(--control); border-radius:4px; overflow:hidden; margin:6px 0 4px}
 .bar > span{position:absolute; left:0; top:0; bottom:0; border-radius:4px; background:var(--portal-cat1); transition:width .8s cubic-bezier(.2,.7,.2,1)}
 .barends{display:flex; justify-content:space-between; font-size:10px; color:var(--sub); margin:-2px 0 4px}
@@ -133,9 +126,9 @@ h2.sec::before{content:""; width:5px; height:20px; background:var(--blue900); bo
 .filterbar .fl{font-size:12px; font-weight:700; color:var(--sub)}
 .chip{appearance:none; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:4px; padding:6px 13px; font-size:12.5px; font-weight:700; color:var(--sub)}
 .chip .cdot{width:9px; height:9px; border-radius:2px; flex:0 0 auto}
-.chip[aria-pressed="true"]{color:#fff; border-color:transparent; background:var(--navy)}
+.chip[aria-pressed="true"]{color:#fff; border-color:transparent; background:var(--portal-ai)}
 .chip[aria-pressed="true"] .cdot{box-shadow:0 0 0 1.5px #fff}
-.chip:focus-visible{outline:2px solid var(--blue900); outline-offset:2px}
+.chip:focus-visible{outline:2px solid #000; box-shadow:0 0 0 4px #FFD43D; outline-offset:1px}
 @media(max-width:720px){
   .two{grid-template-columns:1fr}
   .budrow .bn{flex-basis:110px}

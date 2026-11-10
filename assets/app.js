@@ -24,7 +24,7 @@
      「目標が基準からどれだけ改善方向に動くか＝目標の野心度」を中間目標到達=100%として表示する。
      現状値が無いため、ここでは基準値→R7目標のバーは『目標の位置』を示す。 */
   function targetProgress(ind){
-    // 改善方向に向けて 基準→最終目標 のスパンの中で 中間目標(R7)がどこか（％）
+    // 改善方向に向けて 基準→最終目標 のスパンの中で 中間目標（令和7年度）がどこか（％）
     const b=ind.baseline, mid=ind.target_mid, fin=ind.target_final;
     if(b==null||fin==null) return null;
     const span = fin-b;
@@ -32,11 +32,11 @@
     const midPct = Math.max(0,Math.min(100, Math.abs((mid-b)/span)*100));
     return {midPct};
   }
-  /* 改善の向きは、基準値と最終目標(R12)の値から計算する（hino-portal DESIGN.md 6.1、DESIGN.md ADR-4）。
+  /* 改善の向きは、基準値と最終目標（令和12年度）の値から計算する（hino-portal DESIGN.md 6.1、DESIGN.md ADR-4）。
      最終目標 > 基準値 なら増加で改善、< なら減少で改善、= なら維持。値は転記した原典の値のまま比べる（丸めない）。
      計算した向きが data/kpi.json の direction と合わない指標は、向きを出さずに注記する（direction の neutral はどれとも合わない）。 */
   const DIR_LABEL = {up:'増加で改善', down:'減少で改善', keep:'維持'};
-  const DIR_PENDING = '向きは原典で確かめ中';
+  const DIR_PENDING = '向きは原典で確かめているところ';
   function calcDir(ind){
     const b=ind.baseline, fin=ind.target_final;
     if(b==null||fin==null) return null;
@@ -60,14 +60,14 @@
       <h2 class="sec">収録している資料の時点</h2>
       <p class="lead">成果指標は基準値と目標値（中間目標＝令和7年度、最終目標＝令和12年度）で、実績値は含みません。実施計画は令和7〜9年度、住民意識調査は令和6年8〜9月実施です。一部の指標は目標の年次が異なります（中間・最終が令和5・9年度、令和6・10年度のもの）。<br>第6次総合計画は令和3〜12年度の10年計画です。3つの資料を34分野で並べています。</p>
       <div class="stats">
-        <div class="stat"><div class="k">計画期間</div><div class="v">10<span class="u">年</span></div><div class="note">R3〜R12・中間目標はR7</div></div>
-        <div class="stat"><div class="k">成果指標(KPI)</div><div class="v">${kpiCount}<span class="u">指標</span></div><div class="note">${kpiFields}/34分野で設定</div></div>
-        <div class="stat"><div class="k">実施計画 事業費（R7-R9・3年計）</div><div class="v">${yen(budget)}</div><div class="note">概算事業費の合計</div></div>
-        <div class="stat"><div class="k">住民意識調査 回収率（R6）</div><div class="v">${SURVEY.meta.survey.response_rate}<span class="u">%</span></div><div class="note">有効回答 ${fmt(SURVEY.meta.survey.responses)}件</div></div>
-        <div class="stat"><div class="k">幸福度 平均（R6・10点満点）</div><div class="v">${SURVEY.happiness.average}<span class="u">/10点</span></div><div class="note">6点以上が6割超</div></div>
+        <div class="stat"><div class="k">計画期間</div><div class="v">10<span class="u">年</span></div><div class="note">令和3〜12年度・中間目標は令和7年度</div></div>
+        <div class="stat"><div class="k">成果指標</div><div class="v">${kpiCount}<span class="u">指標</span></div><div class="note">${kpiFields}/34分野で設定</div></div>
+        <div class="stat"><div class="k">実施計画 事業費（令和7〜9年度・3年計）</div><div class="v">${yen(budget)}</div><div class="note">概算事業費の合計</div></div>
+        <div class="stat"><div class="k">住民意識調査 回収率（令和6年）</div><div class="v">${SURVEY.meta.survey.response_rate}<span class="u">%</span></div><div class="note">有効回答 ${fmt(SURVEY.meta.survey.responses)}件</div></div>
+        <div class="stat"><div class="k">幸福度 平均（令和6年・10点満点）</div><div class="v">${SURVEY.happiness.average}<span class="u">/10点</span></div><div class="note">6点以上が6割超</div></div>
       </div>
 
-      <h2 class="sec">政策の柱別 事業費（実施計画 R7-R9・3年計）</h2>
+      <h2 class="sec">政策の柱別 事業費（実施計画 令和7〜9年度・3年計）</h2>
       <p class="lead">5つの政策の柱ごとに、実施計画の概算事業費（3年計）を比較しています。色は政策の柱（凡例と対応）。</p>
       <div class="pillars">
         ${KPI.pillars.map(p=>`<span class="pill"><span class="dot" style="background:${pillarFill(p.id)}"></span>${p.id}. ${p.name}</span>`).join('')}
@@ -111,10 +111,10 @@
           return `<div class="ind">
             <div class="iname">${ind.name}</div>
             <div class="bar" role="img" aria-label="${aria}"><span style="width:${w.toFixed(0)}%"></span></div>
-            <div class="barends"><span>基準</span><span>最終目標(R12)</span></div>
+            <div class="barends"><span>基準</span><span>最終目標（令和12年度）</span></div>
             <div class="barmeta">
               <span>基準 <b>${fmt(ind.baseline)}${ind.unit}</b> <span class="yr">(${ind.baseline_year})</span></span>
-              <span>中間(R7) <b>${fmt(ind.target_mid)}${ind.unit}</b> → 最終(R12) <b>${fmt(ind.target_final)}${ind.unit}</b></span>
+              <span>中間（令和7年度） <b>${fmt(ind.target_mid)}${ind.unit}</b> → 最終（令和12年度） <b>${fmt(ind.target_final)}${ind.unit}</b></span>
             </div>
             ${dt==null ? '' : `<div class="idir${dt===DIR_PENDING?' pending':''}">${dt}</div>`}
           </div>`;
@@ -130,9 +130,9 @@
       </div>`;
     }).join('');
     el.innerHTML=`
-      <h2 class="sec">成果指標 — 分野別の基準値と目標値（基本計画）</h2>
-      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標(R12)</b> までを区間としたときに、<b>中間目標(R7)</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このページは各指標の実績値を収録していません。基準値の年次は分野により異なります（各指標に併記）。</p>
-      <p class="lead">各指標の下の「増加で改善」「減少で改善」「維持」は、改善の向きです。向きは基準値と目標値から計算しています。最終目標(R12)の値が基準値より大きければ増加で改善、小さければ減少で改善、同じなら維持です。計算した向きが、このページのデータに記録している向き（data/kpi.json の direction）と合わない${pendingCount}指標は、向きを出さず「${DIR_PENDING}」としています。</p>
+      <h2 class="sec">分野別の成果指標の基準値と目標値（基本計画）</h2>
+      <p class="lead">バーは、各指標の <b>基準値</b> から <b>最終目標（令和12年度）</b> までを区間としたときに、<b>中間目標（令和7年度）</b> がどこに位置するか（目標の置き方）を示します。バーは目標の位置であり、実績の達成状況ではありません。このページは各指標の実績値を収録していません。基準値の年次は分野により異なります（各指標に併記）。</p>
+      <p class="lead">各指標の下の「増加で改善」「減少で改善」「維持」は、改善の向きです。向きは基準値と目標値から計算しています。最終目標（令和12年度）の値が基準値より大きければ増加で改善、小さければ減少で改善、同じなら維持です。計算した向きが、このページのデータに記録している向き（data/kpi.json の direction）と合わない${pendingCount}指標は、向きを出さず「${DIR_PENDING}」としています。</p>
       ${chips}
       <div class="grid">${cards}</div>`;
     el.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{kpiFilter=+b.dataset.pf; renderKpi(); animateBars(el);});
@@ -167,8 +167,8 @@
       </div>`;
     }).join('');
     el.innerHTML=`
-      <h2 class="sec">実施計画 — 分野別の概算事業費（令和7〜9年度／3年計・降順）</h2>
-      <p class="lead">基本計画の施策を実現する具体的方策。3年計画で毎年度ローリング更新されます。総額 約 <b>${yen(total)}</b>（概算事業費の合計）。事業費の大きい順に並べています。</p>
+      <h2 class="sec">分野別の実施計画の概算事業費（令和7〜9年度／3年計・降順）</h2>
+      <p class="lead">基本計画の施策を実現する具体的方策。3年計画で毎年度見直されます。総額 約 <b>${yen(total)}</b>（概算事業費の合計）。事業費の大きい順に並べています。</p>
       <div class="card2" style="margin-bottom:24px">${rows}</div>
       <h2 class="sec">主要事業 上位12（事業費・3年計／降順）</h2>
       <p class="lead">実施計画の主要事業を、概算事業費（3年計）の大きい順に12事業並べています。</p>
@@ -200,7 +200,7 @@
     const el=document.getElementById('p-survey');
     // 構成比の項目は区別の色を順に当てる（hino-portal DESIGN.md 3.4）。凡例に名前と数値を併記する。
     el.innerHTML=`
-      <h2 class="sec">住民の声 — 住民意識調査（令和6年実施）</h2>
+      <h2 class="sec">住民意識調査の結果（令和6年実施）</h2>
       <p class="lead">対象：${SURVEY.meta.survey.target}／調査期間 ${SURVEY.meta.survey.period}／有効回答 ${fmt(SURVEY.meta.survey.responses)}件（回収率 ${SURVEY.meta.survey.response_rate}%）。</p>
       <div class="meta-note">
         <b>データの定義：</b>割合（%）は有効回答（n=${fmt(SURVEY.meta.survey.responses)}）に対する比率。「複数回答・件数」と記したグラフは回答した人数（件）で、合計は100%になりません。出典：第6次日野町総合計画にかかる住民意識調査結果（概要）。
